@@ -1,7 +1,431 @@
 ﻿@page "/"
+@layout EmptyLayout
 
-<PageTitle>Home</PageTitle>
+<!DOCTYPE html><html dir="rtl" lang="he"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>דף הבית - MuSeek</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&amp;family=Heebo:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#121317",
+            "surface-dim": "#121317",
+            "surface-container-lowest": "#0d0e12",
+            "surface-container-low": "#1a1b20",
+            "surface-container": "#1f1f24",
+            "surface-container-high": "#292a2e",
+            "surface-container-highest": "#343439",
+            "on-surface": "#e3e2e8",
+            "on-surface-variant": "#bbc9cf",
+            "primary": "#a5e7ff",
+            "primary-container": "#00d2ff",
+            "on-primary": "#003543",
+            "on-primary-container": "#00566a",
+            "secondary": "#ddb8ff",
+            "secondary-container": "#62259b",
+            "on-secondary": "#490081",
+            "on-secondary-container": "#d1a1ff",
+            "outline": "#859399",
+            "outline-variant": "#3c494e"
+          },
+          fontFamily: {
+            sans: ["Heebo", "Assistant", "Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    :root {
+      color-scheme: dark;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: #0d0e12;
+      color: #e3e2e8;
+      font-family: 'Heebo', 'Assistant', 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="m-0 p-0 bg-surface-container-lowest text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container w-full overflow-x-hidden">
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<!-- TOP NAVIGATION BAR -->
+<header class="fixed top-0 inset-x-0 z-50 bg-[#121317]/90 backdrop-blur-xl border-b border-[#3c494e]/40 shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
+<div class="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
+<!-- Logo + Nav Links -->
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#00d2ff]/20 to-[#ddb8ff]/20 border border-[#00d2ff]/40 flex items-center justify-center text-[#00d2ff] shadow-[0_0_15px_rgba(0,210,255,0.35)] group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">graphic_eq</span>
+</div>
+<span class="text-2xl font-black tracking-tight bg-gradient-to-l from-white via-[#e3e2e8] to-[#a5e7ff] bg-clip-text text-transparent">MuSeek</span>
+</a>
+<!-- Links -->
+<nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+<a class="px-4 py-2 rounded-xl bg-[#292a2e]/70 text-[#a5e7ff] border border-[#3c494e]/60" href="#">ראשי</a>
+<a class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="#discover">גילוי שירים</a>
+<a class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="#taste-mesh">קהילת טעם</a>
+<a class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="#genres">ז'אנרים</a>
+</nav>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-4">
+<a class="text-sm font-medium text-[#bbc9cf] hover:text-white transition-colors px-3 py-2" href="/login">התחברות</a>
+<a class="text-sm font-bold bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(0,210,255,0.4)] hover:shadow-[0_0_30px_rgba(0,210,255,0.7)] transition-all" href="/register">הרשמה</a>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT CONTAINER -->
+<main class="flex-grow pt-20">
+<!-- HERO SECTION -->
+<section class="relative overflow-hidden py-16 md:py-24 border-b border-[#3c494e]/30">
+<!-- Glow ambient backdrops -->
+<div class="absolute -top-40 right-1/4 w-[600px] h-[600px] bg-[#62259b]/25 rounded-full blur-[150px] pointer-events-none"></div>
+<div class="absolute top-20 left-10 w-[500px] h-[500px] bg-[#00d2ff]/15 rounded-full blur-[160px] pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<!-- Text Column -->
+<div class="lg:col-span-7 flex flex-col items-start gap-6 text-right">
+<!-- Badge -->
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1a1b20]/90 border border-[#00d2ff]/30 shadow-inner">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00d2ff] animate-ping"></span>
+<span class="text-xs font-bold text-[#a5e7ff] tracking-wider uppercase">טכנולוגיית תהודה מוזיקלית קהילתית</span>
+</div>
+<!-- Headline -->
+<h1 class="text-4xl md:text-6xl font-extrabold leading-[1.15] tracking-tight">
+            לגלות את השיר הבא שלך דרך אנשים <span class="bg-gradient-to-l from-[#a5e7ff] via-[#00d2ff] to-[#ddb8ff] bg-clip-text text-transparent">עם אותו הקצב</span>
+</h1>
+<!-- Explanatory paragraph -->
+<p class="text-lg md:text-xl text-[#bbc9cf] leading-relaxed max-w-2xl">נמאס לשמוע שוב ושוב את אותם השירים? ב-MuSeek מתחברים לאנשים עם טעם מוזיקלי בול כמו שלך ומוצאים מוזיקה חדשה ומעולה שאי אפשר למצוא באלגוריתם הרגיל.</p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="group px-8 py-4 bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] font-bold text-base rounded-xl shadow-[0_0_28px_rgba(0,210,255,0.5)] hover:shadow-[0_0_40px_rgba(0,210,255,0.85)] transition-all flex items-center gap-2" href="/register">
+<span class="">התחל לחקור עכשיו</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+</a>
+<a class="px-7 py-4 bg-[#1f1f24] hover:bg-[#292a2e] text-[#e3e2e8] font-semibold text-base rounded-xl border border-[#3c494e]/50 backdrop-blur-md transition-colors flex items-center gap-2" href="#how-it-works">
+<span class="material-symbols-outlined text-[#ddb8ff]">play_circle</span>
+<span class="">איך זה עובד?</span>
+</a>
+</div>
+<!-- Micro Listeners info -->
+<div class="flex items-center gap-4 pt-4 border-t border-[#3c494e]/30 w-full">
+<div class="flex items-center -space-x-4 space-x-reverse relative z-0">
+  <div class="w-9 h-9 rounded-full bg-[#292a2e] border-2 border-[#121317] flex items-center justify-center text-xs text-[#00d2ff] font-bold shadow-sm z-30">מ</div>
+  <div class="w-9 h-9 rounded-full bg-[#62259b] border-2 border-[#121317] flex items-center justify-center text-xs text-white font-bold shadow-sm z-20">ת</div>
+  <div class="w-9 h-9 rounded-full bg-[#1a1b20] border-2 border-[#121317] flex items-center justify-center text-xs text-[#ddb8ff] font-bold shadow-sm z-10">א</div>
+</div>
+<span class="text-xs text-[#bbc9cf]">מעל <strong class="text-white">2,800</strong> חובבי מוזיקה מחוברים לתדרים כעת</span>
+</div>
+</div>
+<!-- Hero Visual Column -->
+<div class="lg:col-span-5 relative flex justify-center">
+<div class="relative w-full max-w-[520px] rounded-2xl p-2.5 bg-gradient-to-tr from-[#00d2ff]/30 via-[#62259b]/40 to-[#292a2e]/60 border border-[#3c494e]/60 shadow-[0_0_60px_rgba(0,210,255,0.25)]">
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#0d0e12] relative group">
+<!-- Provided Image Asset -->
+<img alt="Cosmic vinyl audio node frequency mesh" class="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1XnaFEbK-hxFd4KXVSWmYybQc8D0Zh6VQjVLiJpnO86YedSNd3Cj7KwqTAAzx_tTykUzcYPrkfHlZywnRBauxFXSvk8DM4y_lNoj0lPqxNS3hBkANOk7uFsy50jokQIf560qrvV0FLLqjxEo5oWKmOk2wlViy3gWORBejb8yrBW_ySqQBQWX56fdM3-G83nnAhPWckihWzMA80RNnoRhX3m8pxdc7E9jKEPozDDNSgJCvXa0YMB6lddIIgo">
+<div class="absolute inset-0 bg-gradient-to-t from-[#0d0e12]/90 via-transparent to-transparent"></div>
+<!-- Floating Acoustic Waveform Badge & Live Status -->
+<div class="absolute bottom-4 inset-x-4 bg-[#121317]/90 border border-[#3c494e]/70 backdrop-blur-xl px-4 py-3 rounded-xl flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-[#00d2ff]/20 text-[#00d2ff] flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">graphic_eq</span>
+</div>
+<div class="flex flex-col text-right">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#00d2ff] animate-ping"></span>
+<span class="text-[11px] font-bold uppercase text-[#00d2ff] tracking-wider">תדר אקוסטי פעיל</span>
+</div>
+<span class="text-sm font-semibold text-white">Cyber Synthwave · 128 BPM</span>
+</div>
+</div>
+<!-- Wave bar graph -->
+<div class="flex items-end gap-1 h-6">
+<span class="w-1 bg-[#00d2ff] h-2 rounded-full animate-pulse"></span>
+<span class="w-1 bg-[#00d2ff] h-5 rounded-full animate-pulse"></span>
+<span class="w-1 bg-[#ddb8ff] h-6 rounded-full animate-pulse"></span>
+<span class="w-1 bg-[#00d2ff] h-3 rounded-full animate-pulse"></span>
+<span class="w-1 bg-[#ddb8ff] h-5 rounded-full animate-pulse"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- COMMUNITY DISCOVERY STATS BAR -->
+<section class="border-b border-[#3c494e]/30 bg-[#121317]/60 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 py-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex items-center gap-4 p-5 rounded-2xl bg-[#1a1b20]/70 border border-[#3c494e]/40 shadow-sm">
+<div class="w-14 h-14 rounded-xl bg-[#00d2ff]/15 border border-[#00d2ff]/30 text-[#00d2ff] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[30px]">library_music</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-3xl font-extrabold text-white tracking-tight">+45K</span>
+<span class="text-sm text-[#bbc9cf]">שירים חדשים החודש</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-5 rounded-2xl bg-[#1a1b20]/70 border border-[#3c494e]/40 shadow-sm">
+<div class="w-14 h-14 rounded-xl bg-[#62259b]/40 border border-[#ddb8ff]/30 text-[#ddb8ff] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-3xl font-extrabold text-[#ddb8ff] tracking-tight">98%</span>
+<span class="text-sm text-[#bbc9cf]">התאמה בטעם קהילתי</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-5 rounded-2xl bg-[#1a1b20]/70 border border-[#3c494e]/40 shadow-sm">
+<div class="w-14 h-14 rounded-xl bg-[#00d2ff]/15 border border-[#00d2ff]/30 text-[#00d2ff] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[30px]">groups</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-3xl font-extrabold text-white tracking-tight">+12,000</span>
+<span class="text-sm text-[#bbc9cf]">חוקרי מוזיקה אקטיביים</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FEATURE HIGHLIGHTS ("למה דווקא MuSeek?") -->
+<section class="py-20 max-w-7xl mx-auto px-6" id="how-it-works">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 text-right">
+<div>
+<div class="inline-flex items-center gap-2 text-[#00d2ff] mb-2 font-semibold text-sm">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span class="">מנוע הגילוי האלטרנטיבי</span>
+</div>
+<h2 class="text-3xl md:text-4xl font-extrabold text-white">למה דווקא MuSeek?</h2>
+</div>
+<p class="text-base text-[#bbc9cf] max-w-md">
+          החלפנו את המלצות המיינסטרים השחוקות ברשת סוציאלית חיה שמחברת חיבורים אמיתיים בין טעמים ייחודיים.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div class="group p-8 rounded-2xl bg-[#1a1b20]/80 hover:bg-[#1f1f24] border border-[#3c494e]/40 hover:border-[#00d2ff]/50 transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-[0_0_30px_rgba(0,210,255,0.2)]"><div class="flex flex-col gap-4 text-right"><div class="w-14 h-14 rounded-xl bg-[#292a2e] border border-[#3c494e]/60 flex items-center justify-center text-[#00d2ff] group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[32px]">radar</span></div><h3 class="text-xl font-bold text-white">לצאת מהלופ של האלגוריתם</h3><p class="text-sm text-[#bbc9cf] leading-relaxed">מנגנון ייעודי שפורץ את לולאות השירים החוזרות של הסטרימינג הרגיל ומציג לך אמנים מחתרתיים שמעולם לא שמעת.</p></div><div class="mt-8 pt-4 border-t border-[#3c494e]/30 flex items-center gap-1.5 justify-end"><span class="w-2 h-2 rounded-full bg-[#00d2ff]"></span><span class="text-xs text-[#a5e7ff] font-medium">100% מוזיקה עצמאית</span></div></div><div class="group p-8 rounded-2xl bg-[#1a1b20]/80 hover:bg-[#1f1f24] border border-[#3c494e]/40 hover:border-[#ddb8ff]/50 transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-[0_0_30px_rgba(221,184,255,0.2)]"><div class="flex flex-col gap-4 text-right"><div class="w-14 h-14 rounded-xl bg-[#292a2e] border border-[#3c494e]/60 flex items-center justify-center text-[#ddb8ff] group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[32px]">hub</span></div><h3 class="text-xl font-bold text-white">חיבור ישיר לפי טעם אישי</h3><p class="text-sm text-[#bbc9cf] leading-relaxed">חיבור ישיר למאזינים עם DNA מוזיקלי זהה לשלך. גילוי פלייליסטים סודיים והחלפת המלצות ללא תיווך מסחרי.</p></div><div class="mt-8 pt-4 border-t border-[#3c494e]/30 flex items-center justify-between bg-[#0d0e12]/50 p-2.5 rounded-xl"><span class="text-xs font-semibold text-[#ddb8ff]">התאמת טעם פעילה</span><span class="text-xs font-bold text-white">96.8% סנכרון</span></div></div><div class="group p-8 rounded-2xl bg-[#1a1b20]/80 hover:bg-[#1f1f24] border border-[#3c494e]/40 hover:border-[#00d2ff]/50 transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-[0_0_30px_rgba(0,210,255,0.2)]"><div class="flex flex-col gap-4 text-right"><div class="w-14 h-14 rounded-xl bg-[#292a2e] border border-[#3c494e]/60 flex items-center justify-center text-[#00d2ff] group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[32px]">album</span></div><h3 class="text-xl font-bold text-white">חיפוש עמוק לפי תת-ז'אנרים</h3><p class="text-sm text-[#bbc9cf] leading-relaxed">צלילה אל תוך עולמות נישתיים כמו Deconstructed Club, Dark Techno, Ambient Drone ו-Micro House עם סינון ספקטרלי מתקדם.</p></div><div class="mt-8 pt-4 border-t border-[#3c494e]/30 flex flex-wrap gap-2"><span class="text-xs bg-[#292a2e] text-[#a5e7ff] px-3 py-1 rounded-lg border border-[#3c494e]/40">Dark Techno</span><span class="text-xs bg-[#292a2e] text-[#a5e7ff] px-3 py-1 rounded-lg border border-[#3c494e]/40">Deconstructed Club</span></div></div></div>
+</section>
+<!-- LIVE TASTE MESH / ACTIVITY FEED -->
+<section class="py-16 bg-[#121317]/70 border-t border-b border-[#3c494e]/30" id="taste-mesh">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 text-right">
+<div>
+<div class="inline-flex items-center gap-2 text-[#ddb8ff] mb-2 font-semibold text-xs tracking-wider uppercase">
+<span class="w-2 h-2 rounded-full bg-[#ddb8ff] animate-ping"></span>
+<span class="">עדכון ישיר מהקהילה</span>
+</div>
+<h2 class="text-3xl font-extrabold text-white">מה שומעים עכשיו בקהילה</h2>
+</div>
+<a class="text-sm font-bold text-[#00d2ff] hover:underline flex items-center gap-1" href="#taste-mesh">
+<span class="">צפה בכל משתמשי הרשת</span>
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Community Matches (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<!-- Match 1: תמר לוין -->
+<div class="p-5 rounded-2xl bg-[#1a1b20] border border-[#3c494e]/50 hover:border-[#00d2ff]/40 transition-colors shadow-md">
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs text-[#bbc9cf]">התאמה קהילתית חדשה</span>
+<span class="px-2.5 py-1 rounded-full bg-[#00d2ff]/20 text-[#00d2ff] text-xs font-bold border border-[#00d2ff]/40">95% התאמה</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#00d2ff] to-[#62259b] flex items-center justify-center text-white font-bold text-base shadow-[0_0_12px_rgba(0,210,255,0.4)]">
+                    תל
+                  </div>
+<div class="text-right">
+<h4 class="font-bold text-white text-base">תמר לוין</h4>
+<p class="text-xs text-[#bbc9cf]">חובבת Dark Techno &amp; Minimal</p>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-xl bg-[#292a2e] hover:bg-[#00d2ff] hover:text-[#003543] text-xs font-bold text-white transition-colors border border-[#3c494e]/50">
+                  התחבר
+                </button>
+</div>
+</div>
+<!-- Match 2: אלון ברקו -->
+<div class="p-5 rounded-2xl bg-[#1a1b20] border border-[#3c494e]/50 hover:border-[#ddb8ff]/40 transition-colors shadow-md">
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs text-[#bbc9cf]">התאמת תדרים גבוהה</span>
+<span class="px-2.5 py-1 rounded-full bg-[#62259b]/40 text-[#ddb8ff] text-xs font-bold border border-[#ddb8ff]/40">91% התאמה</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#ddb8ff] to-[#292a2e] flex items-center justify-center text-white font-bold text-base shadow-[0_0_12px_rgba(221,184,255,0.4)]">
+                    אב
+                  </div>
+<div class="text-right">
+<h4 class="font-bold text-white text-base">אלון ברקו</h4>
+<p class="text-xs text-[#bbc9cf]">מאזין עכשיו ל-Post-Punk מזרחי</p>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-xl bg-[#292a2e] hover:bg-[#ddb8ff] hover:text-[#490081] text-xs font-bold text-white transition-colors border border-[#3c494e]/50">
+                  התחבר
+                </button>
+</div>
+</div>
+</div>
+<!-- Currently Playing Songs Matrix (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<!-- Song Row 1 -->
+<div class="p-4 rounded-xl bg-[#1a1b20] border border-[#3c494e]/40 flex items-center justify-between hover:bg-[#1f1f24] transition-colors group">
+<div class="flex items-center gap-4">
+<button aria-label="Play song" class="w-10 h-10 rounded-xl bg-[#00d2ff]/20 text-[#00d2ff] group-hover:bg-[#00d2ff] group-hover:text-[#003543] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="text-right">
+<h4 class="font-bold text-white text-sm group-hover:text-[#00d2ff] transition-colors">Echoes of Neon Dust</h4>
+<p class="text-xs text-[#bbc9cf]">Kavinsky Pulse · Deconstructed Club</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-1">
+<span class="w-1 bg-[#00d2ff] h-4 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-6 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-2 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-5 rounded-full"></span>
+</div>
+<span class="text-xs text-[#bbc9cf] font-mono">03:45</span>
+<button class="text-[#bbc9cf] hover:text-[#00d2ff] transition-colors" title="שמור">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</button>
+</div>
+</div>
+<!-- Song Row 2 -->
+<div class="p-4 rounded-xl bg-[#1a1b20] border border-[#3c494e]/40 flex items-center justify-between hover:bg-[#1f1f24] transition-colors group">
+<div class="flex items-center gap-4">
+<button aria-label="Play song" class="w-10 h-10 rounded-xl bg-[#ddb8ff]/20 text-[#ddb8ff] group-hover:bg-[#ddb8ff] group-hover:text-[#490081] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="text-right">
+<h4 class="font-bold text-white text-sm group-hover:text-[#ddb8ff] transition-colors">Subterranean Mirage</h4>
+<p class="text-xs text-[#bbc9cf]">DJ Sagi · Dark Techno</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-1">
+<span class="w-1 bg-[#ddb8ff] h-3 rounded-full"></span>
+<span class="w-1 bg-[#ddb8ff] h-5 rounded-full"></span>
+<span class="w-1 bg-[#ddb8ff] h-6 rounded-full"></span>
+<span class="w-1 bg-[#ddb8ff] h-3 rounded-full"></span>
+</div>
+<span class="text-xs text-[#bbc9cf] font-mono">05:12</span>
+<button class="text-[#bbc9cf] hover:text-[#ddb8ff] transition-colors" title="שמור">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</button>
+</div>
+</div>
+<!-- Song Row 3 -->
+<div class="p-4 rounded-xl bg-[#1a1b20] border border-[#3c494e]/40 flex items-center justify-between hover:bg-[#1f1f24] transition-colors group">
+<div class="flex items-center gap-4">
+<button aria-label="Play song" class="w-10 h-10 rounded-xl bg-[#00d2ff]/20 text-[#00d2ff] group-hover:bg-[#00d2ff] group-hover:text-[#003543] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="text-right">
+<h4 class="font-bold text-white text-sm group-hover:text-[#00d2ff] transition-colors">Levantine Waves</h4>
+<p class="text-xs text-[#bbc9cf]">The Mediterranean Drift · Ambient Folk</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-1">
+<span class="w-1 bg-[#00d2ff] h-5 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-3 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-6 rounded-full"></span>
+<span class="w-1 bg-[#00d2ff] h-4 rounded-full"></span>
+</div>
+<span class="text-xs text-[#bbc9cf] font-mono">04:20</span>
+<button class="text-[#bbc9cf] hover:text-[#00d2ff] transition-colors" title="שמור">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM CALL TO ACTION BANNER -->
+<section class="py-20 max-w-7xl mx-auto px-6">
+<div class="relative overflow-hidden rounded-3xl p-10 md:p-14 bg-gradient-to-r from-[#1a1b20] via-[#1f1f24] to-[#1a1b20] border border-[#00d2ff]/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 text-right">
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#00d2ff]/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -top-20 w-80 h-80 bg-[#62259b]/25 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-3 max-w-xl">
+<span class="text-xs font-bold text-[#00d2ff] tracking-widest uppercase">הצטרפות לקהילת התדרים</span>
+<h2 class="text-3xl md:text-4xl font-extrabold text-white">מוכן למצוא מוזיקה שבאמת תעיף אותך?</h2>
+<p class="text-base text-[#bbc9cf]">
+            אלפי יוצרים ומאזינים כבר עברו ל-MuSeek כדי למצוא צלילים חדשים שמתאימים בול לנשמה.
+          </p>
+</div>
+<div class="relative z-10 shrink-0">
+<a class="px-8 py-4 bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] font-bold text-base rounded-xl shadow-[0_0_24px_rgba(0,210,255,0.6)] hover:shadow-[0_0_35px_rgba(0,210,255,0.9)] transition-all block text-center" href="/register">
+            הצטרף עכשיו בחינם
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- COMPREHENSIVE FOOTER -->
+<footer class="w-full bg-[#0d0e12] border-t border-[#3c494e]/30 text-right">
+<div class="max-w-7xl mx-auto px-6 py-14">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+<!-- Brand -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-[#00d2ff]/20 border border-[#00d2ff]/40 flex items-center justify-center text-[#00d2ff]">
+<span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+</div>
+<span class="text-xl font-bold text-white">MuSeek</span>
+</div>
+<p class="text-xs text-[#bbc9cf] leading-relaxed">
+            פלטפורמה חברתית לחיבור בין טעמים מוזיקליים, גילוי ז'אנרים מחתרתיים ושיתוף פלייליסטים בקהילת תדרים פתוחה.
+          </p>
+</div>
+<!-- Quick Links -->
+<div class="flex flex-col gap-3">
+<h4 class="text-sm font-bold text-white">ניווט מהיר</h4>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">ראשי</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#discover">גילוי שירים</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#taste-mesh">קהילת טעם</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#genres">ז'אנרים פופולריים</a>
+</div>
+<!-- Community & Creators -->
+<div class="flex flex-col gap-3">
+<h4 class="text-sm font-bold text-white">קהילה ויוצרים</h4>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">יוצרים עצמאיים</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">חדרי האזנה קבוצתיים</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">מדד התדרים</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">שיתופי פעולה</a>
+</div>
+<!-- Terms & Support -->
+<div class="flex flex-col gap-3">
+<h4 class="text-sm font-bold text-white">תנאים ותמיכה</h4>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">מדיניות פרטיות</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">תנאי שימוש</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">נגישות</a>
+<a class="text-xs text-[#bbc9cf] hover:text-white transition-colors" href="#">יצירת קשר ותמיכה</a>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="pt-8 border-t border-[#3c494e]/30 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-xs text-[#bbc9cf]">© 2026 MuSeek. כל הזכויות שמורות לפלטפורמת המוזיקה.</p>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-bold text-[#ddb8ff] bg-[#1a1b20] border border-[#3c494e]/50 px-3 py-1 rounded-full uppercase tracking-wider">High Fidelity Frequency Network</span>
+</div>
+</div>
+</div>
+</footer>
+
+
+</body></html>

@@ -1,6 +1,99 @@
-@API_HostAddress = http://localhost:5080
+# הכתובת של השרת
+@MuSeek_HostAddress = http://localhost:5080
 
-GET {{API_HostAddress}}/weatherforecast/
+###
+
+# ===== משתמשים =====
+
+# שליפת כל המשתמשים
+GET {{MuSeek_HostAddress}}/api/users
 Accept: application/json
 
 ###
+
+# שליפת משתמש לפי מזהה
+GET {{MuSeek_HostAddress}}/api/users/1
+Accept: application/json
+
+###
+
+# בדיקה אם שם משתמש קיים (צפוי: true)
+GET {{MuSeek_HostAddress}}/api/users/exists/admin
+
+###
+
+# בדיקה אם שם משתמש קיים (צפוי: true)
+GET {{MuSeek_HostAddress}}/api/users/exists/david
+
+###
+
+# בדיקה אם אימייל קיים (צפוי: true)
+GET {{MuSeek_HostAddress}}/api/users/email-exists/admin@museek.com
+
+###
+
+# ספירת משתמשים לפי תפקיד
+GET {{MuSeek_HostAddress}}/api/users/count-by-role
+
+###
+
+# הוספת משתמש בדיקה (תפקיד ברירת מחדל: User)
+POST {{MuSeek_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "username": "test.user",
+  "email": "test.user@museek.com",
+  "password": "TestPassword123"
+}
+
+###
+
+# התחברות עם פרטים נכונים (צפוי: 200 והאובייקט של המשתמש)
+POST {{MuSeek_HostAddress}}/api/users/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+###
+
+# התחברות עם סיסמה שגויה (צפוי: 401 Unauthorized)
+POST {{MuSeek_HostAddress}}/api/users/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "wrongpassword"
+}
+
+###
+
+# הבקשות הבאות פועלות על משתמש הבדיקה.
+# יש להחליף את 11 במזהה (id) שהתקבל בהוספת המשתמש.
+
+# שינוי תפקיד ל-Host
+PUT {{MuSeek_HostAddress}}/api/users/11/role?roleName=Host
+
+###
+
+# עדכון סיסמה
+PUT {{MuSeek_HostAddress}}/api/users/11/password
+Content-Type: application/json
+
+"NewPassword123"
+
+###
+
+# עדכון אימייל
+PUT {{MuSeek_HostAddress}}/api/users/11/email
+Content-Type: application/json
+
+"updated.test.user@museek.com"
+
+###
+
+# מחיקת משתמש (מחיקה רכה - הפיכת IsActive ל-false)
+DELETE {{MuSeek_HostAddress}}/api/users/11

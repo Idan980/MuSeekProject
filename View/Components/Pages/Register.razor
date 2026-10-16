@@ -1,0 +1,389 @@
+﻿@page "/register"
+@layout EmptyLayout
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="bg-[#121317]">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="shell-type" content="web_blank" />
+  <title>הרשמה - MuSeek</title>
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <!-- CSS Custom Variables & Base Styles -->
+  <style>
+    :root {
+      --primary: #ffb2b7;
+      --on-primary: #67001b;
+      --primary-container: #ff516a;
+      --on-primary-container: #5b0017;
+      --secondary: #d2bbff;
+      --on-secondary: #3f008e;
+      --surface: #141219;
+      --on-surface: #e7e0eb;
+    }
+
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #121317 !important;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <!-- Tailwind CSS Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "outline": "#aa888a",
+            "on-tertiary-fixed": "#2a1700",
+            "surface": "#141219",
+            "surface-container-highest": "#36333c",
+            "on-tertiary-container": "#3e2400",
+            "surface-container-low": "#1d1a22",
+            "tertiary-fixed": "#ffddb8",
+            "error": "#ffb4ab",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-primary-container": "#5b0017",
+            "inverse-primary": "#bc0b3b",
+            "on-surface": "#e7e0eb",
+            "secondary-fixed": "#eaddff",
+            "on-primary": "#67001b",
+            "secondary": "#d2bbff",
+            "on-secondary-container": "#c9aeff",
+            "primary-fixed-dim": "#ffb2b7",
+            "surface-variant": "#36333c",
+            "outline-variant": "#5b4041",
+            "on-background": "#e7e0eb",
+            "background": "#141219",
+            "surface-container-high": "#2b2931",
+            "on-surface-variant": "#e3bdbf",
+            "on-secondary-fixed-variant": "#5a00c6",
+            "error-container": "#93000a",
+            "surface-bright": "#3b3840",
+            "inverse-on-surface": "#322f37",
+            "on-tertiary-fixed-variant": "#653e00",
+            "on-error-container": "#ffdad6",
+            "surface-tint": "#ffb2b7",
+            "surface-dim": "#141219",
+            "primary-container": "#ff516a",
+            "surface-container-lowest": "#0f0d14",
+            "tertiary-container": "#ca8100",
+            "surface-container": "#211e26",
+            "tertiary": "#ffb95f",
+            "on-secondary": "#3f008e",
+            "on-tertiary": "#472a00",
+            "primary-fixed": "#ffdadb",
+            "on-primary-fixed": "#40000d",
+            "secondary-fixed-dim": "#d2bbff",
+            "primary": "#ffb2b7",
+            "inverse-surface": "#e7e0eb",
+            "on-primary-fixed-variant": "#92002a",
+            "secondary-container": "#6001d1",
+            "on-secondary-fixed": "#25005a",
+            "on-error": "#690005"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            "display-hero-mobile": ["Syne"],
+            "label-badge": ["Rubik"],
+            "body-md": ["Rubik"],
+            "body-sm": ["Rubik"],
+            "display-hero": ["Syne"],
+            "title-md": ["Rubik"],
+            "headline-sm": ["Rubik"],
+            "headline-lg": ["Syne"],
+            "headline-md": ["Syne"],
+            "body-lg": ["Rubik"],
+            "label-numeric": ["Rubik"],
+            "headline-lg-mobile": ["Syne"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+  <main class="w-full h-screen bg-[#121317] flex items-center justify-center overflow-hidden p-2 sm:p-4">
+    
+    <div class="flex flex-col w-full h-full max-h-[96vh] items-center justify-center relative overflow-hidden" dir="rtl">
+      
+      <!-- Background Ambient Glows & Waves -->
+      <div class="absolute -top-32 right-1/4 w-96 h-96 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none -z-10"></div>
+      <div class="absolute -bottom-32 left-1/4 w-[32rem] h-[32rem] rounded-full bg-primary-container/15 blur-[100px] pointer-events-none -z-10"></div>
+      
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none -z-10">
+        <svg class="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1000 600">
+          <path class="text-secondary/40" d="M-100,300 C150,120 350,480 600,280 C850,80 950,420 1100,260" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1.5" />
+          <path class="text-primary-container/30" d="M-50,340 C200,160 400,520 650,320 C900,120 1000,460 1150,300" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </div>
+
+      <!-- Main Register Card Container -->
+      <div class="w-full max-w-5xl bg-[#1a1b20]/90 backdrop-blur-2xl rounded-2xl border border-[#3c494e]/50 shadow-[0_0_60px_rgba(0,0,0,0.8)] overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+        
+        <!-- Left Side Banner (Hidden on Mobile) -->
+        <div class="relative lg:col-span-5 hidden lg:flex flex-col justify-between p-6 bg-[#121317]/95 border-l border-[#3c494e]/40 overflow-hidden">
+          <div class="absolute -top-20 -left-20 w-64 h-64 bg-[#62259b]/25 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-10 right-10 w-56 h-56 bg-[#00d2ff]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00d2ff]/20 to-[#ddb8ff]/20 border border-[#00d2ff]/40 flex items-center justify-center text-[#00d2ff] shadow-[0_0_15px_rgba(0,210,255,0.35)]">
+                <span class="material-symbols-outlined text-xl">graphic_eq</span>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xl font-black tracking-tight bg-gradient-to-l from-white via-[#e3e2e8] to-[#a5e7ff] bg-clip-text text-transparent">MuSeek</span>
+                <span class="text-[9px] font-bold text-[#00d2ff] uppercase tracking-widest">DISCOVER TOGETHER</span>
+              </div>
+            </div>
+
+            <div class="space-y-2 mt-4">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#1a1b20] border border-[#00d2ff]/30 text-[#a5e7ff] text-[11px] font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00d2ff] animate-ping"></span>
+                קהילת התאמה קולית פעילה
+              </div>
+              <h2 class="text-xl font-extrabold text-white leading-tight">קצב התדרים של הקהילה מחכה לך</h2>
+              <p class="text-xs text-[#bbc9cf] leading-relaxed">חיבורים מוזיקליים בזמן אמת, זיהוי אלגוריתמי עמוק ושיתוף תדרי שמע עם חובבי סאונד מכל העולם.</p>
+            </div>
+          </div>
+
+          <!-- Community Sound Match Card -->
+          <div class="relative z-10 my-4 bg-[#1a1b20]/80 border border-[#3c494e]/50 rounded-xl p-3.5 backdrop-blur-md">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[#00d2ff] text-sm" style="font-variation-settings: 'FILL' 1;">hub</span>
+                <span class="text-xs font-medium text-white">תאימות סאונד קהילתית</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-[#00d2ff]/20 border border-[#00d2ff]/40 text-[#00d2ff] text-[11px] font-bold">Match 98.4%</span>
+            </div>
+
+            <!-- Avatars -->
+            <div class="flex items-center justify-between pt-1">
+              <div class="flex -space-x-3 space-x-reverse">
+                <div class="w-8 h-8 rounded-full bg-[#292a2e] border-2 border-[#121317] flex items-center justify-center overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8oaBBaekjt36ksk0-NJBgKN2bAE_LlaB4-T3lyZ2GULwyoBV-o1y_cdboSq4bUYZADhm2QdlQfmY7BvjSYs0bxNUlT5rNT2jgLs3un6nrJeMdQJD_YI-QR3ioSMVCKvXKR_LWKv9VHJ-bWltVAsaH_T2uPxJUNLyKdyUr5BJ-yEVotK1WKcyTU0HIQiyZKPwJV_bPjUg5y5q1UEccwNEWI933wCNnjLfGtrjYkYAPbFG3ZpEwN7eAbQ" alt="Avatar 1" />
+                </div>
+                <div class="w-8 h-8 rounded-full bg-[#62259b] border-2 border-[#121317] flex items-center justify-center overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALxljPFV7vJb8DSCPf-eDXflpkOe-PnIEyHz3mragGPO0qa0matVamMiD_HO6pBR8FMZrdTg42ERv9kihwgNKarR8UjlcinPMaQ_0s6J_RwrT-3PqxUhqiaPHnPj07utXgbHSN3XptrvDA3CVUhi3JGc1sv9fD0oyAEgcE6ub2GtlZqn9oKLRl5DVu4MCHudalrAzlfX7LHXaNjITYeSq-VcX_G7EBQs9pIuNxTtNdloPbWQ7r8ObKIQ" alt="Avatar 2" />
+                </div>
+                <div class="w-8 h-8 rounded-full bg-[#1a1b20] border-2 border-[#121317] flex items-center justify-center overflow-hidden">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAROkqNhXeF-WLD67eJQwzg_qUFoEuxzR4RZRyVc4xD3jL9ZuJuac3FbSHRU7n8UY4pTdixu4XqTLGOvTyy3oodgDRk2YN4wdeQU7TqnYxjOwDvi_lzbwGEyHacLHr1dbRITA9zTuqywYfcfVXfWOPt2BxXPcAUZu57LrU0swaAOvKwJnwlhhohMl-ZS6DebXRQqy61719r_MeOEB8PLRtcJVj1p3_Q32MSuG2qOS4f1UZY2tUO7pQK8g" alt="Avatar 3" />
+                </div>
+              </div>
+              <div class="flex flex-col items-end">
+                <span class="text-xs font-bold text-[#ddb8ff]">1,420+ תדרים</span>
+                <span class="text-[10px] text-[#bbc9cf]">הצטרפו השבוע</span>
+              </div>
+            </div>
+
+            <!-- Audio Waveform Visualizer Bars -->
+            <div class="mt-3 flex items-end gap-1 h-6 px-1">
+              <span class="w-1 bg-[#00d2ff] rounded-full h-2 animate-pulse"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-4 animate-pulse"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-5"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-3"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-6"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-5 animate-pulse"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-2"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-4"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-5"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-3"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-5"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-1.5"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-4 animate-pulse"></span>
+              <span class="w-1 bg-[#00d2ff] rounded-full h-6"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-3"></span>
+              <span class="w-1 bg-[#ddb8ff] rounded-full h-1.5"></span>
+            </div>
+          </div>
+
+          <!-- Bottom Security Note -->
+          <div class="relative z-10 flex items-center justify-between text-[11px] text-[#bbc9cf] pt-2 border-t border-[#3c494e]/30">
+            <span class="inline-flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs text-[#bbc9cf]">lock</span>
+              הצפנה מקצה לקצה
+            </span>
+            <span class="font-mono text-[10px] text-[#bbc9cf] tracking-wider">v2.4 SONIC_ID</span>
+          </div>
+        </div>
+
+        <!-- Right Side Form -->
+        <div class="lg:col-span-7 p-5 sm:p-6 lg:p-7 flex flex-col justify-center bg-[#1a1b20]">
+          
+          <!-- Mobile Brand Logo Header -->
+          <div class="flex items-center gap-2 mb-3 lg:hidden">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#00d2ff]/20 to-[#ddb8ff]/20 border border-[#00d2ff]/40 flex items-center justify-center text-[#00d2ff]">
+              <span class="material-symbols-outlined text-base font-bold">graphic_eq</span>
+            </div>
+            <span class="text-lg font-black text-white">MuSeek</span>
+          </div>
+
+          <!-- Header Titles -->
+          <div class="space-y-0.5 mb-4">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">הצטרף לקהילת MuSeek</h1>
+            <p class="text-xs text-[#bbc9cf]">פתח עולם חדש של מוזיקה שלא הכרת</p>
+          </div>
+
+          <!-- OAuth Social Registration Buttons -->
+          <div class="grid grid-cols-3 gap-2.5 mb-3.5">
+            <!-- Google -->
+            <button type="button" class="group flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-[#292a2e]/70 hover:bg-[#292a2e] border border-[#3c494e]/50 hover:border-[#00d2ff]/40 transition-all duration-200">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
+                <path d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.3l3.7 2.9C6.2 7.3 8.8 5 12 5z" fill="#EA4335" />
+                <path d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" fill="#4285F4" />
+                <path d="M5.3 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.6 6.3C.6 8.3 0 10.5 0 12.8s.6 4.5 1.6 6.5l3.7-4.5z" fill="#FBBC05" />
+                <path d="M12 23.5c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.2 0-5.8-2.3-6.7-5.3L1.6 16.5C3.5 20.3 7.4 23.5 12 23.5z" fill="#34A853" />
+              </svg>
+              <span class="text-xs text-white font-medium hidden sm:inline">Google</span>
+            </button>
+
+            <!-- Spotify -->
+            <button type="button" class="group flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-[#292a2e]/70 hover:bg-[#292a2e] border border-[#3c494e]/50 hover:border-[#00d2ff]/40 transition-all duration-200">
+              <svg class="w-3.5 h-3.5 text-[#1DB954]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+              </svg>
+              <span class="text-xs text-white font-medium hidden sm:inline">Spotify</span>
+            </button>
+
+            <!-- Apple Music -->
+            <button type="button" class="group flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl bg-[#292a2e]/70 hover:bg-[#292a2e] border border-[#3c494e]/50 hover:border-[#00d2ff]/40 transition-all duration-200">
+              <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.87-.9.04-2.02.6-2.67 1.36-.58.67-.99 1.74-.85 2.78 1.02.08 2.01-.52 2.6-1.27z" />
+              </svg>
+              <span class="text-xs text-white font-medium hidden sm:inline">Apple Music</span>
+            </button>
+          </div>
+
+          <!-- Divider -->
+          <div class="relative flex items-center justify-center mb-3.5">
+            <div class="w-full h-px bg-[#3c494e]/50"></div>
+            <span class="absolute bg-[#1a1b20] px-3 text-[11px] text-[#bbc9cf] uppercase tracking-wider">או הרשמה באמצעות דוא״ל</span>
+          </div>
+
+          <!-- Registration Form -->
+          <form class="space-y-2.5" onsubmit="event.preventDefault();">
+            <!-- Username Input -->
+            <div>
+              <label for="username" class="block text-xs font-semibold text-white mb-1">שם משתמש</label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">person</span>
+                <input id="username" type="text" placeholder="בחר כינוי לפרופיל הסאונד..." required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
+              </div>
+            </div>
+
+            <!-- Email Input -->
+            <div>
+              <label for="email" class="block text-xs font-semibold text-white mb-1">אימייל</label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">alternate_email</span>
+                <input id="email" type="email" dir="ltr" placeholder="name@domain.com" required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200 text-left" />
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div>
+              <label for="password-input" class="block text-xs font-semibold text-white mb-1">סיסמה</label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">lock</span>
+                <input id="password-input" type="password" placeholder="לפחות 8 תווים, אותיות ומספרים" required class="w-full pr-9 pl-9 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
+                <button id="toggle-pwd-btn" type="button" onclick="toggleRegisterPassword()" class="absolute left-3 text-[#bbc9cf] hover:text-white focus:outline-none flex items-center">
+                  <span id="pwd-icon" class="material-symbols-outlined text-lg">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div>
+              <label for="confirm-password" class="block text-xs font-semibold text-white mb-1">אימות סיסמה</label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">verified_user</span>
+                <input id="confirm-password" type="password" placeholder="הקלד שוב את הסיסמה שבחרת" required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
+              </div>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="pt-1">
+              <label class="flex items-start gap-2.5 cursor-pointer select-none">
+                <input type="checkbox" checked class="mt-0.5 w-3.5 h-3.5 rounded bg-[#121317] border-[#3c494e] text-[#00d2ff] focus:ring-[#00d2ff] focus:ring-offset-0 cursor-pointer accent-[#00d2ff]" />
+                <span class="text-[11px] text-[#bbc9cf] leading-snug">אני מאשר קבלת המלצות מוזיקליות מותאמות אישית ועדכונים קהילתיים על אמנים חדשים</span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full mt-2.5 py-2.5 px-5 rounded-xl bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] font-bold text-sm tracking-wide shadow-[0_0_24px_rgba(0,210,255,0.4)] hover:shadow-[0_0_36px_rgba(0,210,255,0.7)] active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2">
+              <span>צור חשבון והתחל לגלות</span>
+              <span class="material-symbols-outlined text-lg">arrow_back</span>
+            </button>
+          </form>
+
+          <!-- Switch to Login Page Link -->
+          <div class="mt-3 pt-2.5 border-t border-[#3c494e]/30 rounded-lg text-center flex flex-wrap items-center justify-center gap-1.5">
+            <span class="text-xs text-[#bbc9cf]">כבר יש לך משתמש?</span>
+            <a href="/login" class="inline-flex items-center gap-1 text-xs font-bold text-[#00d2ff] hover:text-[#a5e7ff] transition-colors duration-200">
+              <span>התחבר כאן</span>
+              <span class="material-symbols-outlined text-sm">login</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Sync Footer Indicators -->
+      <div class="flex items-center justify-center gap-4 mt-3 text-on-surface-variant font-label-numeric text-label-numeric">
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00d2ff] animate-ping"></span>
+          <span class="text-[11px] text-[#bbc9cf]">סנכרון תדרים אקטיבי</span>
+        </div>
+        <span class="text-[#3c494e]">•</span>
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#ddb8ff]"></span>
+          <span class="text-[11px] text-[#bbc9cf]">פרופיל טעם דינמי</span>
+        </div>
+        <span class="text-[#3c494e]">•</span>
+        <div class="flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#859399]"></span>
+          <span class="text-[11px] text-[#bbc9cf]">אלגוריתם תאימות שמע MuSeek v2</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toggle Password Visibility Script -->
+  <script>
+    function toggleRegisterPassword() {
+      const el = document.getElementById('password-input');
+      const icon = document.getElementById('pwd-icon');
+      if (el.type === 'password') {
+        el.type = 'text';
+        icon.innerText = 'visibility_off';
+      } else {
+        el.type = 'password';
+        icon.innerText = 'visibility';
+      }
+    }
+  </script>
+</body>
+</html>

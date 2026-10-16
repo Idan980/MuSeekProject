@@ -1,0 +1,238 @@
+﻿@page "/login"
+@layout EmptyLayout
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="bg-[#0d0e12]">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="shell-type" content="web_blank" />
+  <title>התחברות - MuSeek</title>
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <!-- CSS Custom Styles -->
+  <style>
+    :root {
+      --primary: #00d2ff;
+      --on-primary: #003543;
+      --surface: #0d0e12;
+      --surface-card: #16181f;
+      --accent-purple: #ddb8ff;
+    }
+
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #0d0e12 !important;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <!-- Tailwind CSS Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Rubik', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-[#0d0e12] font-sans text-white antialiased">
+  <main class="w-full h-screen bg-[#0d0e12] flex items-center justify-center overflow-hidden">
+    
+    <!-- Main Outer Container -->
+    <div class="flex flex-col w-full relative h-screen items-center justify-center px-4 py-2 overflow-hidden bg-[#0d0e12] selection:bg-[#00d2ff] selection:text-[#003543]">
+      
+      <!-- Background Glow & Cosmic Waves -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute -top-40 right-1/4 w-[550px] h-[550px] rounded-full bg-[#62259b]/20 blur-[150px]"></div>
+        <div class="absolute -bottom-40 left-10 w-[550px] h-[550px] rounded-full bg-[#00d2ff]/15 blur-[160px]"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[600px] opacity-25 mix-blend-screen pointer-events-none">
+          <svg class="w-full h-full" fill="none" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cosmicWave1" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.1" />
+                <stop offset="50%" stop-color="#00d2ff" stop-opacity="0.6" />
+                <stop offset="80%" stop-color="#ddb8ff" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#62259b" stop-opacity="0.1" />
+              </linearGradient>
+              <linearGradient id="cosmicWave2" x1="100%" y1="50%" x2="0%" y2="50%">
+                <stop offset="0%" stop-color="#ddb8ff" stop-opacity="0.1" />
+                <stop offset="50%" stop-color="#62259b" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#00d2ff" stop-opacity="0.4" />
+              </linearGradient>
+            </defs>
+            <path d="M-50 300 C180 180, 360 440, 600 280 C840 120, 1020 420, 1250 280" fill="none" stroke="url(#cosmicWave1)" stroke-width="2" />
+            <path d="M-50 330 C170 440, 420 180, 620 320 C820 470, 1010 160, 1250 330" fill="none" opacity="0.7" stroke="url(#cosmicWave2)" stroke-dasharray="6 4" stroke-width="1.5" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main Login Card Wrapper -->
+      <div class="relative z-10 w-full max-w-md mx-auto">
+        
+        <!-- Login Card -->
+        <div class="bg-[#16181f]/90 backdrop-blur-2xl rounded-2xl p-5 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.6)] border border-[#3c494e]/50 relative overflow-hidden">
+          
+          <!-- Top Accent Line -->
+          <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#00d2ff] to-[#ddb8ff]"></div>
+
+          <!-- Header / Brand Logo -->
+          <div class="flex flex-col items-center text-center mb-6">
+            <a href="#" class="flex items-center gap-2.5 group mb-2">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#00d2ff]/20 to-[#ddb8ff]/20 border border-[#00d2ff]/40 flex items-center justify-center text-[#00d2ff] shadow-[0_0_15px_rgba(0,210,255,0.35)] group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+              </div>
+              <div class="flex flex-col items-start text-right">
+                <span class="text-xl font-black tracking-tight bg-gradient-to-l from-white via-[#e3e2e8] to-[#a5e7ff] bg-clip-text text-transparent leading-none">MuSeek</span>
+                <span class="text-[9px] font-bold text-[#ddb8ff] tracking-widest uppercase mt-0.5">Discover Together</span>
+              </div>
+            </a>
+            <h1 class="text-xl font-bold text-white tracking-tight mb-1">ברוך שובך ל-MuSeek</h1>
+            <p class="text-xs text-[#bbc9cf]">המוזיקה החדשה שלך ממתינה לך</p>
+          </div>
+
+          <!-- Login Form -->
+          <form id="loginForm" class="flex flex-col gap-3.5" onsubmit="event.preventDefault();">
+            
+            <!-- Username Input -->
+            <div class="flex flex-col gap-1 text-right">
+              <label for="usernameInput" class="text-xs font-semibold text-[#e3e2e8] flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px] text-[#00d2ff]">person</span>
+                <span>שם משתמש</span>
+              </label>
+              <div class="relative flex items-center">
+                <input id="usernameInput" type="text" placeholder="הזן שם משתמש או אימייל" required class="w-full bg-[#0d0e12] border border-[#3c494e]/60 text-white placeholder:text-[#859399]/60 px-3.5 py-2 rounded-xl text-xs focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all" />
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="flex flex-col gap-1 text-right">
+              <div class="flex items-center justify-between">
+                <label for="passwordInput" class="text-xs font-semibold text-[#e3e2e8] flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-[#00d2ff]">lock</span>
+                  <span>סיסמה</span>
+                </label>
+                <a href="#" class="text-[11px] text-[#ddb8ff] hover:text-[#00d2ff] transition-colors focus:outline-none">שכחת סיסמה?</a>
+              </div>
+              <div class="relative flex items-center">
+                <input id="passwordInput" type="password" placeholder="••••••••" required class="w-full bg-[#0d0e12] border border-[#3c494e]/60 text-white placeholder:text-[#859399]/60 px-3.5 py-2 pe-10 rounded-xl text-xs focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all" />
+                <button type="button" aria-label="הצג סיסמה" onclick="togglePasswordVisibility()" class="absolute left-2.5 p-1 text-[#859399] hover:text-white focus:outline-none">
+                  <span id="pwdVisibilityIcon" class="material-symbols-outlined text-[18px]">visibility</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember Me Checkbox -->
+            <div class="flex items-center justify-start gap-2 pt-0.5">
+              <label class="relative flex items-center cursor-pointer select-none">
+                <input id="rememberMe" type="checkbox" checked class="peer sr-only" />
+                <div class="w-4 h-4 rounded bg-[#0d0e12] border border-[#3c494e]/70 peer-checked:bg-[#00d2ff] peer-checked:border-[#00d2ff] flex items-center justify-center transition-all">
+                  <span class="material-symbols-outlined text-[#003543] text-[14px] opacity-0 peer-checked:opacity-100 font-bold transition-opacity">check</span>
+                </div>
+                <span class="ms-2 text-xs text-[#bbc9cf]">זכור אותי במכשיר זה</span>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="loginSubmitBtn" type="submit" class="w-full py-2.5 px-5 mt-1 rounded-xl bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] font-bold text-sm transition-all duration-300 shadow-[0_0_20px_rgba(0,210,255,0.4)] hover:shadow-[0_0_30px_rgba(0,210,255,0.7)] flex items-center justify-center gap-2 group cursor-pointer">
+              <span class="font-bold">התחבר לחשבון</span>
+              <span class="material-symbols-outlined text-[18px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="flex items-center gap-3 my-3">
+            <div class="flex-1 h-px bg-[#3c494e]/40"></div>
+            <span class="text-xs text-[#859399]">או באמצעות</span>
+            <div class="flex-1 h-px bg-[#3c494e]/40"></div>
+          </div>
+
+          <!-- OAuth Social Login Buttons -->
+          <div class="grid grid-cols-2 gap-2.5 mb-3">
+            <!-- Spotify Button -->
+            <button type="button" class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#1f1f24] hover:bg-[#292a2e] border border-[#3c494e]/50 text-white text-xs font-semibold transition-colors focus:outline-none">
+              <svg class="w-4 h-4 fill-[#1DB954]" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.21.343-.658.45-1.001.24-2.833-1.731-6.399-2.122-10.601-1.159-.391.089-.781-.157-.87-.548-.089-.391.157-.781.548-.87 4.6-.105 8.552.329 11.685 2.247.343.21.451.658.239 1.001zm1.472-3.272c-.264.43-.83.568-1.26.304-3.242-1.993-8.185-2.568-12.018-1.405-.487.148-1.003-.133-1.151-.62-.148-.487.133-1.003.62-1.151 4.38-1.33 9.824-.69 13.505 1.572.43.264.568.83.304 1.26zm.136-3.419c-3.888-2.308-10.298-2.52-14.011-1.393-.596.181-1.228-.162-1.41-.758-.182-.596.162-1.228.758-1.41 4.269-1.296 11.35-1.05 15.82 1.606.536.318.712 1.013.394 1.549-.318.536-1.013.712-1.551.394z"/>
+              </svg>
+              <span>Spotify</span>
+            </button>
+
+            <!-- Google Button -->
+            <button type="button" class="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#1f1f24] hover:bg-[#292a2e] border border-[#3c494e]/50 text-white text-xs font-semibold transition-colors focus:outline-none">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z" fill="#EA4335"/>
+                <path d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" fill="#4285F4"/>
+                <path d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z" fill="#FBBC05"/>
+                <path d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z" fill="#34A853"/>
+              </svg>
+              <span>Google</span>
+            </button>
+          </div>
+
+          <!-- Register Link -->
+          <div class="flex items-center justify-center gap-1.5 pt-0.5 text-center text-xs">
+            <span class="text-[#bbc9cf]">אין לך משתמש?</span>
+            <a href="/register" class="font-bold text-[#00d2ff] hover:text-[#a5e7ff] underline underline-offset-4 decoration-[#00d2ff]/40 hover:decoration-[#00d2ff] transition-all">הירשם עכשיו</a>
+          </div>
+        </div>
+
+        <!-- Live Listener Pulse Widget -->
+        <div class="mt-3 p-2.5 rounded-xl bg-[#16181f]/80 border border-[#3c494e]/40 backdrop-blur-md flex items-center justify-between shadow-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-[#62259b]/30 border border-[#ddb8ff]/30 flex items-center justify-center text-[#ddb8ff]">
+              <span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+            </div>
+            <div class="text-right">
+              <p class="text-xs font-semibold text-white">חוויית התאמת טעם בזמן אמת</p>
+              <p class="text-[11px] text-[#bbc9cf]">+14.2 אלף מאזינים מחוברים כעת</p>
+            </div>
+          </div>
+          <!-- Equalizer Animated Bars -->
+          <div class="flex items-end gap-1 h-5">
+            <span class="w-1 bg-[#00d2ff] h-2 rounded-full animate-pulse"></span>
+            <span class="w-1 bg-[#00d2ff] h-4 rounded-full animate-pulse" style="animation-delay: 150ms;"></span>
+            <span class="w-1 bg-[#ddb8ff] h-5 rounded-full animate-pulse" style="animation-delay: 300ms;"></span>
+            <span class="w-1 bg-[#00d2ff] h-3 rounded-full animate-pulse" style="animation-delay: 450ms;"></span>
+            <span class="w-1 bg-[#ddb8ff] h-4 rounded-full animate-pulse" style="animation-delay: 200ms;"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Toggle Password Script -->
+  <script>
+    function togglePasswordVisibility() {
+      const input = document.getElementById('passwordInput');
+      const icon = document.getElementById('pwdVisibilityIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+  </script>
+</body>
+</html>
