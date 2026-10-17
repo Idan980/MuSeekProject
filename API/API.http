@@ -12,7 +12,7 @@ Accept: application/json
 ###
 
 # שליפת משתמש לפי מזהה
-GET {{MuSeek_HostAddress}}/api/users/1
+GET {{MuSeek_HostAddress}}/api/users/11
 Accept: application/json
 
 ###
