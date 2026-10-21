@@ -285,43 +285,35 @@
           <!-- Registration Form -->
           <form class="space-y-2.5" onsubmit="event.preventDefault();">
             <!-- Username Input -->
-            <div>
-              <label for="username" class="block text-xs font-semibold text-white mb-1">שם משתמש</label>
-              <div class="relative flex items-center">
-                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">person</span>
-                <input id="username" type="text" placeholder="בחר כינוי לפרופיל הסאונד..." required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
-              </div>
-            </div>
+            <Field Label="שם משתמש"
+            InputIcon="person"
+            Placeholder="בחר כינוי לפרופיל הסאונד..."
+            @bind-Value="username"
+            ErrorMessage="@usernameError" />
 
             <!-- Email Input -->
-            <div>
-              <label for="email" class="block text-xs font-semibold text-white mb-1">אימייל</label>
-              <div class="relative flex items-center">
-                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">alternate_email</span>
-                <input id="email" type="email" dir="ltr" placeholder="name@domain.com" required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200 text-left" />
-              </div>
-            </div>
+             <Field Label="אימייל"
+             InputIcon="alternate_email"
+             Type="email"
+             Dir="ltr"
+             Placeholder="name@domain.com"
+             @bind-Value="email"
+             ErrorMessage="@emailError" />
 
             <!-- Password Input -->
-            <div>
-              <label for="password-input" class="block text-xs font-semibold text-white mb-1">סיסמה</label>
-              <div class="relative flex items-center">
-                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">lock</span>
-                <input id="password-input" type="password" placeholder="לפחות 8 תווים, אותיות ומספרים" required class="w-full pr-9 pl-9 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
-                <button id="toggle-pwd-btn" type="button" onclick="toggleRegisterPassword()" class="absolute left-3 text-[#bbc9cf] hover:text-white focus:outline-none flex items-center">
-                  <span id="pwd-icon" class="material-symbols-outlined text-lg">visibility</span>
-                </button>
-              </div>
-            </div>
+             <Field Label="סיסמה"
+              InputIcon="lock"
+              Type="password"
+              Placeholder="••••••••"
+              @bind-Value="password" />
 
             <!-- Confirm Password Input -->
-            <div>
-              <label for="confirm-password" class="block text-xs font-semibold text-white mb-1">אימות סיסמה</label>
-              <div class="relative flex items-center">
-                <span class="material-symbols-outlined absolute right-3 text-[#bbc9cf] pointer-events-none text-lg">verified_user</span>
-                <input id="confirm-password" type="password" placeholder="הקלד שוב את הסיסמה שבחרת" required class="w-full pr-9 pl-3 py-2 bg-[#121317] border border-[#3c494e]/60 rounded-xl text-xs text-white placeholder:text-[#bbc9cf]/50 focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200" />
-              </div>
-            </div>
+              <Field Label="אימות סיסמה"
+              InputIcon="lock_reset"
+              Type="password"
+              Placeholder="••••••••"
+              @bind-Value="confirmPassword"
+              ErrorMessage="@confirmPasswordError" />
 
             <!-- Terms Checkbox -->
             <div class="pt-1">
@@ -386,4 +378,15 @@
     }
   </script>
 </body>
+@code {
+    private string username = "";
+    private string usernameError = "";
+
+    private string email = "";
+    private string emailError = "";
+
+    private string password = "";
+    private string confirmPassword = "";
+    private string confirmPasswordError = "";
+}
 </html>
