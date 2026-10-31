@@ -22,7 +22,7 @@
                required="@IsRequired"
                value="@Value"
                @oninput="OnInputChanged"
-               class="w-full bg-[#121317] border border-[#3c494e]/60 text-white placeholder:text-[#bbc9cf]/50 rounded-xl text-xs focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200 py-2 @(string.IsNullOrEmpty(InputIcon) ? "px-3.5" : "pr-9 pl-3")" />
+               class="w-full bg-[#121317] text-white border border-[#3c494e]/60 placeholder:text-[#bbc9cf]/50 rounded-xl text-xs focus:outline-none focus:border-[#00d2ff] focus:ring-1 focus:ring-[#00d2ff] transition-all duration-200 py-2 [webkit-text-fill-color:white] [box-shadow:0_0_0_30px_#121317_inset_!important] @(string.IsNullOrEmpty(InputIcon) ? "px-3.5" : "pr-9 pl-3")" />
     </div>
 
     @if (!string.IsNullOrEmpty(ErrorMessage))

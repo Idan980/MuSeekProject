@@ -19,19 +19,27 @@ namespace API.Controllers
             this.userDB = userDB;
         }
 
-        // שליפת כל המשתמשים
+        // שליפת כל המשתמשים (ללא סיסמאות)
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAll()
         {
-            return Ok(await userDB.GetAllUsersAsync());
+            var users = await userDB.GetAllUsersAsync();
+            foreach (var u in users)
+            {
+                u.Password = "";
+            }
+            return Ok(users);
         }
 
-        // שליפת משתמש לפי מזהה (Id)
+        // שליפת משתמש לפי מזהה (Id) (ללא סיסמה)
         [HttpGet("{id:int}")]
         public async Task<ActionResult<User>> GetById(int id)
         {
             User? user = await userDB.GetUserByIdAsync(id);
-            return user == null ? NotFound() : Ok(user);
+            if (user == null) return NotFound();
+
+            user.Password = "";
+            return Ok(user);
         }
 
         // בדיקה אם שם משתמש תפוס
@@ -74,15 +82,19 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
 
+            user.Password = "";
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 
-        // התחברות למערכת (שם משתמש וסיסמה)
+        // התחברות למערכת (שם משתמש וסיסמה - החזרת אובייקט ללא סיסמה)
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login([FromBody] User credentials)
         {
             User? user = await userDB.CheckLoginAsync(credentials.Username, credentials.Password);
-            return user == null ? Unauthorized() : Ok(user);
+            if (user == null) return Unauthorized();
+
+            user.Password = "";
+            return Ok(user);
         }
 
         // עדכון תפקיד משתמש
