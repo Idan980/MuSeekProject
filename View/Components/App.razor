@@ -1,23 +1,66 @@
 ﻿<!DOCTYPE html>
-<html lang="he" dir="rtl">
-
+<html lang="he" dir="rtl" class="bg-[#0d0e12]">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MuSeek</title>
     <base href="/" />
-    <ResourcePreloader />
-    <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
-    <link rel="stylesheet" href="@Assets["app.css"]" />
-    <link rel="stylesheet" href="@Assets["View.styles.css"]" />
-    <ImportMap />
-    <link rel="icon" type="image/png" href="images/MuSeekLogo.png" />
-    <HeadOutlet />
+
+    <!-- 1. טעינת פונטים מ-Google (Rubik & Syne) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+    <!-- 2. טעינת ספרית האייקונים (Material Symbols) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+    <!-- 3. סקריפט Tailwind CSS מבוסס CDN והגדרות נושא -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Rubik', 'sans-serif'],
+                            display: ['Syne', 'sans-serif'],
+                        }
+                    }
+                }
+            };
+    </script>
+
+    <!-- רכיב Blazor לניהול תגיות Head דינמיות -->
+    <HeadOutlet @rendermode="pageRenderMode" />
+
+    <style>
+            *, *:focus, *:active {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            /* מניעת שבירת שורות בסרגל העליון בטעינה הראשונית לפני ש-Tailwind טוען */
+            header > div {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                flex-wrap: nowrap !important;
+            }
+
+            header div, header nav {
+                white-space: nowrap !important;
+            }
+    </style>
 </head>
+<body class="bg-[#0d0e12] font-sans text-white antialiased">
+    <Routes @rendermode="pageRenderMode" />
 
-<body>
-    <Routes />
-    <ReconnectModal />
-    <script src="@Assets["_framework/blazor.web.js"]"></script>
+    <script src="_framework/blazor.web.js"></script>
 </body>
-
 </html>
+
+@code {
+    private static readonly IComponentRenderMode pageRenderMode =
+        new InteractiveServerRenderMode(prerender: false);
+}
