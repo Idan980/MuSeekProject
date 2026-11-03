@@ -2,78 +2,265 @@
 @inject UserSession Session
 @inject NavigationManager Navigation
 
-<header class="fixed top-0 inset-x-0 z-50 w-full bg-[#121317]/90 backdrop-blur-xl border-b border-[#3c494e]/40 shadow-[0_4px_30px_rgba(0,0,0,0.6)]">
-    <div class="w-full max-w-7xl mx-auto h-20 px-6 flex items-center justify-between" dir="rtl">
+<header class="museek-header-nav">
+    <div class="museek-nav-wrapper">
+        <!-- אזור ימין: לוגו המערכת -->
+        <LogoWithText/>
 
-        <!-- ימין: לוגו וסרגל ניווט -->
-        <div class="flex items-center gap-10">
-            <a href="/" class="flex items-center gap-2">
-                <LogoWithText />
-            </a>
+        <!-- אזור מרכז: תפריט ניווט ממורכז לחלוטין במיקום מוחלט -->
+        <nav class="nav-center-menu-wrapper">
+            <ul class="nav-center-menu">
+                <li>
+                    <NavLink class="nav-item-link" href="" Match="NavLinkMatch.All">
+                        ראשי
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink class="nav-item-link" href="discover">
+                        גילוי שירים
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink class="nav-item-link" href="taste-mesh">
+                        קהילת טעם
+                    </NavLink>
+                </li>
+            </ul>
+        </nav>
 
-            <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
-                <NavLink class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="" Match="NavLinkMatch.All">
-                    ראשי
-                </NavLink>
-                <NavLink class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="discover">
-                    גילוי שירים
-                </NavLink>
-                <NavLink class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="taste-mesh">
-                    קהילת טעם
-                </NavLink>
-                <NavLink class="px-4 py-2 rounded-xl text-[#bbc9cf] hover:text-white hover:bg-[#1a1b20] transition-colors" href="genres">
-                    ז'אנרים
-                </NavLink>
-            </nav>
-        </div>
-
-        <!-- שמאל: אזור משתמש / אורח -->
-        <div class="flex items-center gap-4">
-            @if (Session.IsLoggedIn)
+        <!-- אזור שמאל: כפתורי פעולה ומצב התחברות דינמי -->
+        <div class="nav-actions-section">
+            @if (Session != null && Session.IsLoggedIn)
             {
-                <span class="text-sm font-medium text-[#bbc9cf] whitespace-nowrap">
-                    שלום, <strong class="text-white font-bold">@Session.Username</strong>
+                <span class="user-greeting">
+                    שלום, <strong>@Session.Username</strong>
                 </span>
-                <button type="button" @onclick="Logout" class="text-sm font-bold bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(0,210,255,0.4)] hover:shadow-[0_0_30px_rgba(0,210,255,0.7)] transition-all cursor-pointer whitespace-nowrap">
+                <button type="button" class="btn-action-register" @onclick="Logout">
                     יציאה
                 </button>
             }
             else
             {
-                <span class="text-sm font-medium text-[#bbc9cf] whitespace-nowrap">
-                    שלום, אורח
-                </span>
-                <a href="/login" class="text-sm font-medium text-[#bbc9cf] hover:text-white transition-colors px-3 py-2 whitespace-nowrap">
-                    התחברות
-                </a>
-                <a href="/register" class="text-sm font-bold bg-[#00d2ff] hover:bg-[#a5e7ff] text-[#003543] px-5 py-2.5 rounded-xl shadow-[0_0_20px_rgba(0,210,255,0.4)] hover:shadow-[0_0_30px_rgba(0,210,255,0.7)] transition-all whitespace-nowrap">
-                    הרשמה
-                </a>
+                <span class="guest-greeting">שלום, אורח</span>
+                <a href="login" class="btn-action-login">התחברות</a>
+                <a href="register" class="btn-action-register">הרשמה</a>
             }
         </div>
-
     </div>
 </header>
+
+<style>
+    :root {
+        --ms-bg-base: #0b0c10;
+        --ms-border-subtle: rgba(255, 255, 255, 0.08);
+        --ms-cyan-primary: #00d2ff;
+        --ms-cyan-glow: rgba(0, 210, 255, 0.35);
+        --ms-cyan-subtle: rgba(0, 210, 255, 0.12);
+        --ms-text-bright: #ffffff;
+        --ms-text-medium: #cbd5e1;
+        --ms-text-muted: #94a3b8;
+        --ms-nav-height: 72px;
+        --ms-radius-full: 9999px;
+    }
+
+    /* סרגל ניווט עליון דביק */
+    .museek-header-nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: var(--ms-nav-height);
+        background: rgba(11, 12, 16, 0.88);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--ms-border-subtle);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+    }
+
+    /* עטיפת הסרגל המגדירה נקודת ייחוס (relative) עבור מרכוז מוחלט */
+    .museek-nav-wrapper {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    /* עיצוב לוגו המערכת */
+    .nav-brand-section {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+    }
+
+    .brand-logo-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 40%, rgba(0, 210, 255, 0.22) 0%, rgba(11, 12, 16, 0.95) 100%);
+        border: 1.5px solid rgba(0, 210, 255, 0.45);
+        box-shadow: 0 0 16px var(--ms-cyan-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .brand-logo-mark svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--ms-cyan-primary);
+        }
+
+    .brand-text-lockup {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .brand-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--ms-text-bright);
+        line-height: 1;
+    }
+
+    .cyan-highlight {
+        color: var(--ms-cyan-primary);
+    }
+
+    .brand-tagline {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: var(--ms-text-muted);
+    }
+
+    /* מיקום מוחלט של תפריט הניווט בדיוק ב-50% מרוחב כל הסרגל */
+    .nav-center-menu-wrapper {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .nav-center-menu {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        background: rgba(19, 22, 34, 0.6);
+        padding: 0.35rem 0.5rem;
+        border-radius: var(--ms-radius-full);
+        border: 1px solid var(--ms-border-subtle);
+    }
+
+    .nav-item-link {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1.15rem;
+        border-radius: var(--ms-radius-full);
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--ms-text-medium);
+        text-decoration: none;
+        transition: all 0.22s ease;
+    }
+
+        .nav-item-link:hover, .nav-item-link.active {
+            color: var(--ms-cyan-primary);
+            background: var(--ms-cyan-subtle);
+        }
+
+    /* אזור כפתורי משתמש מימין/משמאל */
+    .nav-actions-section {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+    }
+
+    .user-greeting {
+        color: var(--ms-text-medium);
+        font-size: 0.95rem;
+    }
+
+        .user-greeting strong {
+            color: #ffffff;
+        }
+
+    .guest-greeting {
+        color: var(--ms-text-muted);
+        font-size: 0.9rem;
+    }
+
+    .btn-action-login {
+        padding: 0.55rem 1.25rem;
+        border-radius: var(--ms-radius-full);
+        font-size: 0.95rem;
+        color: var(--ms-text-medium);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+        .btn-action-login:hover {
+            color: #ffffff;
+        }
+
+    .btn-action-register {
+        padding: 0.55rem 1.45rem;
+        border-radius: var(--ms-radius-full);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #08090d;
+        background: linear-gradient(135deg, #00d2ff 0%, #0099ff 100%);
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .btn-action-register:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 18px rgba(0, 210, 255, 0.4);
+        }
+</style>
 
 @code {
     protected override void OnInitialized()
     {
-        Session.OnChange += OnSessionChanged;
+        // הירשמות מוקדמת לעדכוני שינוי מצב התחברות
+        if (Session != null)
+        {
+            Session.OnChange += OnSessionChanged;
+        }
     }
 
     private void OnSessionChanged()
     {
+        // רענון הרכיב בזמן אמת בעת שינוי נתוני משתמש
         InvokeAsync(StateHasChanged);
     }
 
     private void Logout()
     {
-        Session.Logout();
-        Navigation.NavigateTo("");
+        // ביצוע יציאה מהחשבון והפניה לדף הבית
+        if (Session != null)
+        {
+            Session.Logout();
+            Navigation.NavigateTo("");
+        }
     }
 
     public void Dispose()
     {
-        Session.OnChange -= OnSessionChanged;
+        // הסרת ההרשמה למניעת זליגת זיכרון (Memory Leak)
+        if (Session != null)
+        {
+            Session.OnChange -= OnSessionChanged;
+        }
     }
 }
