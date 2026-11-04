@@ -40,7 +40,7 @@ namespace DAL
             using var command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@Username", user.Username);
             command.Parameters.AddWithValue("@Email", user.Email);
-            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(user.Password));
             command.Parameters.AddWithValue("@RoleName", roleName);
 
             int rows = await command.ExecuteNonQueryAsync();
@@ -93,7 +93,11 @@ namespace DAL
                 return null;
 
             User user = ReadUser(reader);
-            return user.Password == password ? user : null;
+            if (BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                return user;
+            }
+            return null;
         }
 
         // 5. שליפת משתמש לפי מזהה (ExecuteReaderAsync)
@@ -175,7 +179,7 @@ namespace DAL
             using var connection = new MySqlConnection(connectionString);
             await connection.OpenAsync();
             using var command = new MySqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@Password", newPassword);
+            command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(newPassword));
             command.Parameters.AddWithValue("@UserId", userId);
 
             return await command.ExecuteNonQueryAsync() > 0;

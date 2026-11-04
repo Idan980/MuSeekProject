@@ -19,14 +19,14 @@ namespace API.Controllers
             this.userDB = userDB;
         }
 
-        // שליפת כל המשתמשים (ללא סיסמאות)
+        // שליפת כל המשתמשים (ללא סיסמאות או גיבובים)
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAll()
         {
             var users = await userDB.GetAllUsersAsync();
             foreach (var u in users)
             {
-                u.Password = "";
+                u.Password = string.Empty;
             }
             return Ok(users);
         }
@@ -38,7 +38,7 @@ namespace API.Controllers
             User? user = await userDB.GetUserByIdAsync(id);
             if (user == null) return NotFound();
 
-            user.Password = "";
+            user.Password = string.Empty;
             return Ok(user);
         }
 
@@ -82,7 +82,7 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
 
-            user.Password = "";
+            user.Password = string.Empty;
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
         }
 
@@ -93,7 +93,7 @@ namespace API.Controllers
             User? user = await userDB.CheckLoginAsync(credentials.Username, credentials.Password);
             if (user == null) return Unauthorized();
 
-            user.Password = "";
+            user.Password = string.Empty;
             return Ok(user);
         }
 

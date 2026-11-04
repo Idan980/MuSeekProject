@@ -154,6 +154,9 @@ namespace DAL
         /// <summary>
         /// הכנסת 10 משתמשים ראשוניים לצורכי בדיקות (מנהל, 2 הוסטים, 7 משתמשים)
         /// </summary>
+        /// <summary>
+        /// הכנסת 10 משתמשים ראשוניים לצורכי בדיקות עם סיסמאות מגובבות
+        /// </summary>
         private static async Task SeedUsersAsync(string dbConnectionString)
         {
             using var connection = new MySqlConnection(dbConnectionString);
@@ -165,20 +168,25 @@ namespace DAL
 
             if (count == 0)
             {
+                // יצירת גיבוב יחיד עבור סיסמת ברירת המחדל '123456'
+                string defaultHash = BCrypt.Net.BCrypt.HashPassword("123456");
+
                 string insertSql = @"
-                    INSERT INTO Users (Username, Email, PasswordHash, RoleId, IsActive) VALUES 
-                    ('admin', 'admin@museek.com', '123456', 1, TRUE),
-                    ('host_dan', 'dan@museek.com', '123456', 2, TRUE),
-                    ('host_shira', 'shira@museek.com', '123456', 2, TRUE),
-                    ('david', 'david@museek.com', '123456', 3, TRUE),
-                    ('noa', 'noa@museek.com', '123456', 3, TRUE),
-                    ('yossi', 'yossi@museek.com', '123456', 3, TRUE),
-                    ('maya', 'maya@museek.com', '123456', 3, TRUE),
-                    ('ron', 'ron@museek.com', '123456', 3, TRUE),
-                    ('tal', 'tal@museek.com', '123456', 3, TRUE),
-                    ('dana', 'dana@museek.com', '123456', 3, TRUE);
-                ";
+            INSERT INTO Users (Username, Email, PasswordHash, RoleId, IsActive) VALUES 
+            ('admin', 'admin@museek.com', @Hash, 1, TRUE),
+            ('host_dan', 'dan@museek.com', @Hash, 2, TRUE),
+            ('host_shira', 'shira@museek.com', @Hash, 2, TRUE),
+            ('david', 'david@museek.com', @Hash, 3, TRUE),
+            ('noa', 'noa@museek.com', @Hash, 3, TRUE),
+            ('yossi', 'yossi@museek.com', @Hash, 3, TRUE),
+            ('maya', 'maya@museek.com', @Hash, 3, TRUE),
+            ('ron', 'ron@museek.com', @Hash, 3, TRUE),
+            ('tal', 'tal@museek.com', @Hash, 3, TRUE),
+            ('dana', 'dana@museek.com', @Hash, 3, TRUE);
+        ";
+
                 using var insertCmd = new MySqlCommand(insertSql, connection);
+                insertCmd.Parameters.AddWithValue("@Hash", defaultHash);
                 await insertCmd.ExecuteNonQueryAsync();
             }
         }
