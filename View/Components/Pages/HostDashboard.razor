@@ -1,0 +1,38 @@
+﻿@page "/host-dashboard"
+@inject UserSession Session
+@inject NavigationManager Navigation
+
+<PageTitle>לוח בקרה מארח - MuSeek</PageTitle>
+
+@if (isAuthorized)
+{
+    <div class="container mt-4">
+        <h2>לוח בקרה - מארח (Host)</h2>
+        <p>שלום @Session?.Username, ברוך הבא לאזור ניהול התוכן!</p>
+    </div>
+}
+
+@code {
+    // משתנה דגל המאשר את הצגת התוכן רק אם המשתמש מורשה
+    private bool isAuthorized = false;
+
+    protected override void OnInitialized()
+    {
+        // 1. אם אין משתמש מחובר בסשן -> הפניה לדף התחברות
+        if (Session == null)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        // 2. אם המשתמש מחובר אך התפקיד אינו Host (RoleId = 3) -> הפניה לדף אין הרשאה
+        if (Session.RoleId != 3)
+        {
+            Navigation.NavigateTo("/access-denied");
+            return;
+        }
+
+        // 3. אישור הצגת התוכן בדף
+        isAuthorized = true;
+    }
+}

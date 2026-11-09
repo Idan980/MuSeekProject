@@ -1,0 +1,17 @@
+﻿@page "/access-denied"
+@inject NavigationManager Navigation
+
+<PageTitle>אין הרשאה - MuSeek</PageTitle>
+
+<div class="text-center mt-5">
+    <h2 class="text-danger">אין לך הרשאה לצפות בדף זה</h2>
+    <p>הדף אליו ניסית לגשת אינו מורשה לתפקיד שלך.</p>
+    <button class="btn btn-primary" @onclick="GoHome">חזרה לדף הבית</button>
+</div>
+
+@code {
+    private void GoHome()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

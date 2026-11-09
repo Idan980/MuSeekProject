@@ -1,0 +1,33 @@
+﻿@page "/admin-dashboard"
+@inject UserSession Session
+@inject NavigationManager Navigation
+
+@if (isAuthorized)
+{
+    <h3>לוח בקרה - מנהל מערכת (SuperAdmin)</h3>
+    <p>ברוך הבא, @Session?.Username!</p>
+}
+
+@code {
+    private bool isAuthorized = false;
+
+    protected override void OnInitialized()
+    {
+        // 1. אם אין משתמש מחובר -> מעבר לדף התחברות
+        if (Session == null)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        // 2. אם המשתמש מחובר אך אינו SuperAdmin (RoleId != 1) -> מעבר לדף אין הרשאה
+        if (Session.RoleId != 1)
+        {
+            Navigation.NavigateTo("/access-denied");
+            return;
+        }
+
+        // 3. התפקיד מתאים -> מאשרים הצגת התוכן
+        isAuthorized = true;
+    }
+}

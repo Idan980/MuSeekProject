@@ -1,7 +1,7 @@
 ﻿using Model;
 namespace View.Services
 {
-    public class UserSession
+    public class UserSession 
     {
         // פרטי המשתמש המחובר.קוראים מכל דף, משנים רק דרך הפעולות של המחלקה //
 

@@ -141,10 +141,10 @@ namespace DAL
             {
                 string insertSql = @"
                     INSERT INTO Roles (RoleId, RoleName) VALUES 
-                    (1, 'SuperAdmin'),
-                    (2, 'Host'),
-                    (3, 'User'),
-                    (4, 'Guest');
+                    (4, 'SuperAdmin'),
+                    (3, 'Host'),
+                    (2, 'User'),
+                    (1, 'Guest');
                 ";
                 using var insertCmd = new MySqlCommand(insertSql, connection);
                 await insertCmd.ExecuteNonQueryAsync();
@@ -173,16 +173,16 @@ namespace DAL
 
                 string insertSql = @"
             INSERT INTO Users (Username, Email, PasswordHash, RoleId, IsActive) VALUES 
-            ('admin', 'admin@museek.com', @Hash, 1, TRUE),
-            ('host_dan', 'dan@museek.com', @Hash, 2, TRUE),
-            ('host_shira', 'shira@museek.com', @Hash, 2, TRUE),
-            ('david', 'david@museek.com', @Hash, 3, TRUE),
-            ('noa', 'noa@museek.com', @Hash, 3, TRUE),
-            ('yossi', 'yossi@museek.com', @Hash, 3, TRUE),
-            ('maya', 'maya@museek.com', @Hash, 3, TRUE),
-            ('ron', 'ron@museek.com', @Hash, 3, TRUE),
-            ('tal', 'tal@museek.com', @Hash, 3, TRUE),
-            ('dana', 'dana@museek.com', @Hash, 3, TRUE);
+            ('admin', 'admin@museek.com', @Hash, 4, TRUE),
+            ('host_dan', 'dan@museek.com', @Hash, 3, TRUE),
+            ('host_shira', 'shira@museek.com', @Hash, 3, TRUE),
+            ('david', 'david@museek.com', @Hash, 2, TRUE),
+            ('noa', 'noa@museek.com', @Hash, 2, TRUE),
+            ('yossi', 'yossi@museek.com', @Hash, 2, TRUE),
+            ('maya', 'maya@museek.com', @Hash, 2, TRUE),
+            ('ron', 'ron@museek.com', @Hash, 2, TRUE),
+            ('tal', 'tal@museek.com', @Hash, 2, TRUE),
+            ('dana', 'dana@museek.com', @Hash, 2, TRUE);
         ";
 
                 using var insertCmd = new MySqlCommand(insertSql, connection);

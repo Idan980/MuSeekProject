@@ -217,8 +217,16 @@
             // 7. שמירת פרטי המשתמש בשירות ה-UserSession
             Session.Login(user);
 
-            // 8. מעבר לדף הבית
-            Navigation.NavigateTo("");
+            // 8. מעבר לדף המותאם לכל תפקיד באתר
+
+            if (Session == null || Session.RoleId != 4)
+            {
+                Navigation.NavigateTo("/access-denied");
+            }
+            else
+            {
+                Navigation.NavigateTo("/admin-dashboard");
+            }
         }
         catch (HttpRequestException)
         {
