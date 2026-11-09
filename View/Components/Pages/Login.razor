@@ -219,14 +219,20 @@
 
             // 8. מעבר לדף המותאם לכל תפקיד באתר
 
-            if (Session == null || Session.RoleId != 4)
+            if (Session.RoleId == 2)
             {
-                Navigation.NavigateTo("/access-denied");
+                Navigation.NavigateTo("/user-dashboard");
             }
-            else
+            if (Session.RoleId == 3)
+            {
+                Navigation.NavigateTo("/host-dashboard");
+            }
+            if (Session.RoleId == 4)
             {
                 Navigation.NavigateTo("/admin-dashboard");
+
             }
+
         }
         catch (HttpRequestException)
         {

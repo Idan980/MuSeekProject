@@ -18,15 +18,15 @@
 
     protected override void OnInitialized()
     {
-        // 1. אם אין משתמש מחובר בסשן -> הפניה לדף התחברות
+        // 1. אם אין משתמש מחובר -> מעבר לדף הבית
         if (Session == null)
         {
-            Navigation.NavigateTo("/login");
+            Navigation.NavigateTo("/");
             return;
         }
 
         // 2. אם המשתמש מחובר אך התפקיד אינו User (RoleId = 2) -> הפניה לדף אין הרשאה
-        if (Session.RoleId != 2)
+        if (Session.RoleId < 2)
         {
             Navigation.NavigateTo("/access-denied");
             return;

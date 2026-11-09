@@ -13,15 +13,15 @@
 
     protected override void OnInitialized()
     {
-        // 1. אם אין משתמש מחובר -> מעבר לדף התחברות
+        // 1. אם אין משתמש מחובר -> מעבר לדף הבית
         if (Session == null)
         {
-            Navigation.NavigateTo("/login");
+            Navigation.NavigateTo("/");
             return;
         }
 
-        // 2. אם המשתמש מחובר אך אינו SuperAdmin (RoleId != 1) -> מעבר לדף אין הרשאה
-        if (Session.RoleId != 1)
+        // 2. אם המשתמש מחובר אך אינו SuperAdmin (RoleId != 4) -> מעבר לדף אין הרשאה
+        if (Session.RoleId != 4)
         {
             Navigation.NavigateTo("/access-denied");
             return;

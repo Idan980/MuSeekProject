@@ -10,21 +10,58 @@
         <!-- אזור מרכז: תפריט ניווט ממורכז לחלוטין במיקום מוחלט -->
         <nav class="nav-center-menu-wrapper">
             <ul class="nav-center-menu">
+
                 <li>
-                    <NavLink class="nav-item-link" href="" Match="NavLinkMatch.All">
+                    <NavLink class="nav-item-link" href="/#home" Match="NavLinkMatch.All">
                         ראשי
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink class="nav-item-link" href="discover">
-                        גילוי שירים
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink class="nav-item-link" href="taste-mesh">
-                        קהילת טעם
-                    </NavLink>
-                </li>
+
+                @* אורח (אינו מחובר או RoleId = 1) *@
+                @if (Session.RoleId <= 1)
+                {
+                    <li>
+                        <a class="nav-item-link" href="#discovery">
+                            למה MuSeek?
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-item-link" href="#taste-mesh">
+                            קהילת טעם
+                        </a>
+                    </li>
+                }
+
+                @* משתמש רגיל, מארח ומנהל (RoleId = 2, 3, 4) *@
+                @if (Session.RoleId >= 2)
+                {
+                    <li>
+                        <NavLink class="nav-item-link" href="user-dashboard">
+                            User
+                        </NavLink>
+                    </li>
+                }
+
+                @* מארח ומנהל (RoleId = 3, 4) *@
+                @if (Session.RoleId >= 3)
+                {
+                    <li>
+                        <NavLink class="nav-item-link" href="host-dashboard">
+                            Host
+                        </NavLink>
+                    </li>
+                }
+
+                @* מנהל בלבד (RoleId = 4) *@
+                @if (Session.RoleId == 4)
+                {
+                    <li>
+                        <NavLink class="nav-item-link" href="admin-dashboard">
+                            Admin
+                        </NavLink>
+                    </li>
+                }
+
             </ul>
         </nav>
 
