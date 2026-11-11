@@ -1,17 +1,485 @@
 ﻿@page "/access-denied"
 @inject NavigationManager Navigation
 
-<PageTitle>אין הרשאה - MuSeek</PageTitle>
+<!DOCTYPE html>
 
-<div class="text-center mt-5">
-    <h2 class="text-danger">אין לך הרשאה לצפות בדף זה</h2>
-    <p>הדף אליו ניסית לגשת אינו מורשה לתפקיד שלך.</p>
-    <button class="btn btn-primary" @onclick="GoHome">חזרה לדף הבית</button>
-</div>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>אין הרשאת גישה (Access Denied) - MuSeek</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Rubik:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+            :root {
+                --ms-bg: #0b0c10;
+                --ms-surface: #12141c;
+                --ms-surface-card: rgba(18, 20, 28, 0.78);
+                --ms-cyan: #00d2ff;
+                --ms-cyan-glow: rgba(0, 210, 255, 0.35);
+                --ms-purple: #a855f7;
+                --ms-purple-glow: rgba(168, 85, 247, 0.3);
+                --ms-danger: #f43f5e;
+                --ms-danger-glow: rgba(244, 63, 94, 0.25);
+                --ms-text-main: #ffffff;
+                --ms-text-muted: #94a3b8;
+                --ms-border: rgba(255, 255, 255, 0.08);
+                --ms-border-card: rgba(255, 255, 255, 0.12);
+            }
 
-@code {
-    private void GoHome()
-    {
-        Navigation.NavigateTo("/");
-    }
-}
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: var(--ms-bg);
+                color: var(--ms-text-main);
+                font-family: 'Rubik', 'Inter', system-ui, -apple-system, sans-serif;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* Ambient background glows */
+            .bg-glow-container {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+                overflow: hidden;
+            }
+
+            .glow-blob-1 {
+                position: absolute;
+                top: 25%;
+                right: 35%;
+                width: 520px;
+                height: 520px;
+                background: radial-gradient(circle, rgba(0, 210, 255, 0.12) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 70%);
+                filter: blur(80px);
+                border-radius: 50%;
+            }
+
+            .glow-blob-2 {
+                position: absolute;
+                bottom: 20%;
+                left: 30%;
+                width: 450px;
+                height: 450px;
+                background: radial-gradient(circle, rgba(244, 63, 94, 0.09) 0%, rgba(168, 85, 247, 0.06) 60%, transparent 75%);
+                filter: blur(90px);
+                border-radius: 50%;
+            }
+
+            /* Top Subtle Brand Bar */
+            .top-header {
+                position: relative;
+                z-index: 10;
+                width: 100%;
+                padding: 1.25rem 2.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                background: rgba(11, 12, 16, 0.5);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            .brand-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.85rem;
+                text-decoration: none;
+            }
+
+            .brand-logo-img {
+                height: 38px;
+                width: auto;
+                object-fit: contain;
+                filter: drop-shadow(0 0 10px var(--ms-cyan-glow));
+            }
+
+            .brand-text {
+                display: flex;
+                flex-direction: column;
+                text-align: right;
+            }
+
+            .brand-name {
+                font-size: 1.35rem;
+                font-weight: 800;
+                color: var(--ms-text-main);
+                letter-spacing: -0.5px;
+                line-height: 1.1;
+                font-family: 'Inter', sans-serif;
+            }
+
+                .brand-name span {
+                    color: var(--ms-cyan);
+                }
+
+            .brand-badge {
+                font-size: 0.65rem;
+                font-weight: 600;
+                color: var(--ms-text-muted);
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+            }
+
+            .header-support {
+                color: var(--ms-text-muted);
+                text-decoration: none;
+                font-size: 0.875rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                transition: color 0.2s ease;
+            }
+
+                .header-support:hover {
+                    color: var(--ms-cyan);
+                }
+
+            /* Main Container */
+            .page-main {
+                position: relative;
+                z-index: 1;
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2.5rem 1.5rem;
+            }
+
+            /* Central Access Denied Card */
+            .access-card {
+                width: 100%;
+                max-width: 520px;
+                background: var(--ms-surface-card);
+                border: 1px solid var(--ms-border-card);
+                border-radius: 24px;
+                padding: 3rem 2.5rem;
+                text-align: center;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 210, 255, 0.08);
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                position: relative;
+                overflow: hidden;
+                animation: fadeInScale 0.4s ease-out;
+            }
+
+            @@keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px) scale(0.98);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            /* Subtle top accent border line inside card */
+            .access-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 15%;
+                right: 15%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, var(--ms-cyan), var(--ms-purple), transparent);
+            }
+
+            /* Icon Badge Container */
+            .icon-wrapper {
+                position: relative;
+                width: 92px;
+                height: 92px;
+                margin: 0 auto 1.75rem auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .icon-pulse-ring {
+                position: absolute;
+                inset: -6px;
+                border-radius: 50%;
+                border: 1px dashed rgba(0, 210, 255, 0.35);
+                animation: rotateRing 18s linear infinite;
+            }
+
+            @@keyframes rotateRing {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .icon-glow-bg {
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(0, 210, 255, 0.22) 0%, rgba(168, 85, 247, 0.15) 60%, transparent 100%);
+                filter: blur(12px);
+            }
+
+            .icon-bubble {
+                position: relative;
+                width: 80px;
+                height: 80px;
+                background: rgba(18, 20, 28, 0.9);
+                border: 1px solid rgba(0, 210, 255, 0.35);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px var(--ms-cyan-glow);
+            }
+
+                .icon-bubble svg {
+                    width: 38px;
+                    height: 38px;
+                }
+
+            /* Status Pill */
+            .status-code-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding: 0.35rem 0.9rem;
+                border-radius: 9999px;
+                background: rgba(244, 63, 94, 0.12);
+                border: 1px solid rgba(244, 63, 94, 0.3);
+                color: #fb7185;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                margin-bottom: 1.25rem;
+            }
+
+            .status-dot {
+                width: 6px;
+                height: 6px;
+                background-color: #f43f5e;
+                border-radius: 50%;
+                box-shadow: 0 0 8px #f43f5e;
+            }
+
+            /* Typography */
+            .card-title {
+                font-size: 1.85rem;
+                font-weight: 800;
+                color: var(--ms-text-main);
+                margin-bottom: 0.85rem;
+                letter-spacing: -0.5px;
+            }
+
+            .card-description {
+                font-size: 1rem;
+                color: var(--ms-text-muted);
+                line-height: 1.6;
+                margin-bottom: 2rem;
+                padding: 0 0.5rem;
+            }
+
+            .role-highlight {
+                color: #ffffff;
+                font-weight: 600;
+                background: rgba(255, 255, 255, 0.06);
+                padding: 0.15rem 0.5rem;
+                border-radius: 6px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* Action Buttons */
+            .card-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 0.85rem;
+                width: 100%;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                padding: 0.85rem 1.75rem;
+                border-radius: 12px;
+                font-size: 1rem;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.22s ease;
+                cursor: pointer;
+                border: none;
+                font-family: inherit;
+                width: 100%;
+            }
+
+            /* Primary Button: Return Home */
+            .btn-primary {
+                background: linear-gradient(135deg, #00d2ff 0%, #0099ff 100%);
+                color: #0b0c10;
+                box-shadow: 0 4px 18px rgba(0, 210, 255, 0.35);
+            }
+
+                .btn-primary:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 26px rgba(0, 210, 255, 0.5);
+                    color: #08090d;
+                }
+
+                .btn-primary svg {
+                    width: 19px;
+                    height: 19px;
+                    stroke: #0b0c10;
+                    stroke-width: 2.3;
+                }
+
+            /* Secondary Button: Switch Account / Login */
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.05);
+                color: var(--ms-text-main);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+            }
+
+                .btn-secondary:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: rgba(0, 210, 255, 0.4);
+                    color: var(--ms-cyan);
+                    transform: translateY(-1px);
+                }
+
+                .btn-secondary svg {
+                    width: 19px;
+                    height: 19px;
+                    stroke: currentColor;
+                    stroke-width: 2;
+                }
+
+            /* Footer Meta / Helper info */
+            .card-footer-info {
+                margin-top: 1.75rem;
+                padding-top: 1.25rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                font-size: 0.82rem;
+                color: var(--ms-text-muted);
+            }
+
+                .card-footer-info a {
+                    color: var(--ms-cyan);
+                    text-decoration: none;
+                    font-weight: 500;
+                }
+
+                    .card-footer-info a:hover {
+                        text-decoration: underline;
+                    }
+
+            /* Simple Bottom Bar */
+            .page-footer {
+                position: relative;
+                z-index: 10;
+                text-align: center;
+                padding: 1.25rem;
+                font-size: 0.8rem;
+                color: rgba(148, 163, 184, 0.6);
+                border-top: 1px solid rgba(255, 255, 255, 0.03);
+            }
+
+            /* Responsive */
+            @@media (max-width: 576px) {
+                .access-card {
+                    padding: 2.25rem 1.5rem;
+                    border-radius: 20px;
+                }
+
+                .card-title {
+                    font-size: 1.5rem;
+                }
+
+                .card-description {
+                    font-size: 0.92rem;
+                }
+
+                .top-header {
+                    padding: 1rem 1.25rem;
+                }
+            }
+    </style>
+</head>
+<body>
+    <!-- Background decorative glows -->
+    <div aria-hidden="true" class="bg-glow-container">
+        <div class="glow-blob-1"></div>
+        <div class="glow-blob-2"></div>
+    </div>
+    <!-- Central Content Area -->
+    <main class="page-main">
+        <div class="access-card">
+            <!-- Status Code Badge -->
+            <div class="status-code-pill">
+                <span class="status-dot"></span>
+                <span>שגיאה 403 • גישה מוגבלת</span>
+            </div>
+            <!-- Icon Badge: Glowing Lock -->
+            <div class="icon-wrapper">
+                <div class="icon-pulse-ring"></div>
+                <div class="icon-glow-bg"></div>
+                <div class="icon-bubble">
+                    <svg fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <rect height="10" rx="3" stroke="#00d2ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="14" x="5" y="11"></rect>
+                        <path d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11" stroke="#00d2ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        <circle cx="12" cy="15.5" fill="#a855f7" r="1.5"></circle>
+                        <path d="M12 17V18.5" stroke="#a855f7" stroke-linecap="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+            </div>
+            <!-- Title & Message -->
+            <h1 class="card-title">אין הרשאת גישה</h1>
+            <p class="card-description">
+                הדף שאליו ניסית לגשת דורש <span class="role-highlight">תפקיד אחר במערכת</span> או הרשאות ניהול מיוחדות. אם לדעתך מדובר בטעות, נסה להתחבר עם המשתמש המתאים.
+            </p>
+            <!-- Action Buttons -->
+            <div class="card-actions">
+                <!-- Primary Action: Return Home -->
+                <a class="btn btn-primary" href="/" title="חזרה לדף הבית">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>חזרה לדף הבית</span>
+                </a>
+                <!-- Secondary Action: Login with different account -->
+                <a class="btn btn-secondary" href="/login" title="התחברות בחשבון אחר">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                        <polyline points="16 11 18 13 22 9"></polyline>
+                    </svg>
+                    <span>התחברות בחשבון אחר</span>
+                </a>
+            </div>
+        </div>
+    </main>
+    <!-- Clean Bottom Status -->
+    <footer class="page-footer">
+        MuSeek © כל הזכויות שמורות • גילוי מוזיקה וקהילת תדרים
+    </footer>
+</body>
+</html>

@@ -75,7 +75,7 @@ Content-Type: application/json
 # יש להחליף את 11 במזהה (id) שהתקבל בהוספת המשתמש.
 
 # שינוי תפקיד ל-Host
-PUT {{MuSeek_HostAddress}}/api/users/11/role?roleName=Host
+PUT {{MuSeek_HostAddress}}/api/users/12/role?roleName=Host
 
 ###
 

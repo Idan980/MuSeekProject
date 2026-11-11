@@ -6,10 +6,354 @@
 
 @if (isAuthorized)
 {
-    <div class="container mt-4">
-        <h2>לוח בקרה - מארח (Host)</h2>
-        <p>שלום @Session?.Username, ברוך הבא לאזור ניהול התוכן!</p>
-    </div>
+    <!DOCTYPE html>
+    <html lang="he" dir="rtl" class="dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>לוח בקרה למארח / יוצר (HostDashboard) - MuSeek</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+        <script>
+                tailwind.config = {
+                    darkMode: 'class',
+                    theme: {
+                        extend: {
+                            fontFamily: {
+                                sans: ['Inter', 'sans-serif'],
+                                display: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                            },
+                            colors: {
+                                darkBg: '#0d0e12',
+                                cardBg: 'rgba(22, 24, 31, 0.90)',
+                                cyanGlow: '#00d2ff',
+                                purpleGlow: '#62259b',
+                                accentViolet: '#8b5cf6'
+                            }
+                        }
+                    }
+                }
+        </script>
+        <style>
+                body {
+                    background-color: #0d0e12;
+                    color: #e2e8f0;
+                    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                }
+
+                .glass-card {
+                    background: rgba(22, 24, 31, 0.90);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                }
+
+                    .glass-card:hover {
+                        border-color: rgba(98, 37, 155, 0.35);
+                    }
+
+                .glow-cyan {
+                    box-shadow: 0 0 25px -5px rgba(0, 210, 255, 0.25);
+                }
+
+                .glow-purple {
+                    box-shadow: 0 0 25px -5px rgba(98, 37, 155, 0.35);
+                }
+        </style>
+    </head>
+    <body class="min-h-screen bg-[#0d0e12] text-slate-100 antialiased p-4 md:p-8 relative overflow-x-hidden">
+        <!-- Dynamic Ambient Glow Backdrops -->
+        <div class="fixed top-[-10%] left-[-5%] w-[450px] h-[450px] bg-[#00d2ff]/15 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+        <div class="fixed bottom-[-10%] right-[-5%] w-[550px] h-[550px] bg-[#62259b]/25 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+        <div class="fixed top-[30%] right-[20%] w-[350px] h-[350px] bg-purple-600/10 rounded-full blur-[110px] pointer-events-none -z-10"></div>
+
+        <!-- Main Container (Standalone Inner View - No Header/Navbar) -->
+        <main class="max-w-7xl mx-auto space-y-8">
+
+            <!-- Page Header Title & Subtitle -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-white/5">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold mb-2">
+                        <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                        מרחב היוצר והמארח • Creator & Host Suite
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight font-display text-white">לוח בקרה למארח / יוצר</h1>
+                    <p class="text-slate-400 text-sm mt-1">העלאת טראקים חדשים, ניטור ביצועי האזנה ואנליטיקת ז'אנרים בזמן אמת</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        סטטוס אולפן: <span class="font-bold text-white">Live Broadcast Ready</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Cards & Quick Insights (Compact) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Card 1: סך השמעות החודש -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 glow-cyan">
+                    <div class="absolute top-0 right-0 h-1 w-full bg-gradient-to-l from-[#00d2ff] to-cyan-600"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">סך השמעות החודש (Plays)</span>
+                            <div class="text-3xl md:text-4xl font-extrabold text-white mt-2 font-display">45.2K</div>
+                            <div class="flex items-center gap-2 mt-2 text-xs text-cyan-400 font-medium">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                                <span>+18.5% בהשוואה לחודש שעבר</span>
+                            </div>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-[#00d2ff]/10 border border-[#00d2ff]/30 flex items-center justify-center text-[#00d2ff] group-hover:scale-105 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: הז'אנר המוביל -->
+                <div class="glass-card rounded-2xl p-6 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 glow-purple">
+                    <div class="absolute top-0 right-0 h-1 w-full bg-gradient-to-l from-purple-400 to-[#62259b]"></div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">הז'אנר המוביל של היוצר</span>
+                            <div class="text-2xl md:text-3xl font-extrabold text-white mt-2 font-display flex items-center gap-2">
+                                <span>Micro House</span>
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">64% מכלל ההשמעות</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-2">
+                                מדד תדר אקוסטי ממוצע: <span class="text-purple-300 font-mono">124 BPM • 432Hz</span>
+                            </div>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-[#62259b]/25 border border-purple-500/40 flex items-center justify-center text-purple-300 group-hover:scale-105 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Banner & Interactive Mock Form -->
+            <section class="glass-card rounded-2xl p-6 md:p-8 relative overflow-hidden border border-purple-500/20 shadow-2xl">
+                <!-- Glow Accent Behind Header -->
+                <div class="absolute -top-24 right-1/4 w-96 h-48 bg-[#62259b]/25 rounded-full blur-[90px] pointer-events-none"></div>
+
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/5">
+                    <div>
+                        <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                            הפצת מוזיקה ישירה
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-white font-display">העלאת תראק חדש למערכת</h2>
+                        <p class="text-sm text-slate-400 mt-1">מלא את נתוני היצירה והעלה קובץ Master באיכות Hi-Fi כדי לשתף אותו עם מאזיני הרשת</p>
+                    </div>
+
+                    <button class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#00d2ff] via-cyan-400 to-purple-500 text-slate-950 font-extrabold text-sm shadow-lg shadow-cyan-500/20 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                        העלה שיר עכשיו
+                    </button>
+                </div>
+
+                <!-- Upload Form Fields (Mock Form Interface) -->
+                <form class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-5" onsubmit="event.preventDefault();">
+                    <!-- Field 1: Track Title -->
+                    <div class="md:col-span-4 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">שם השיר (Track Title)</label>
+                        <input type="text" value="Cosmic Resonance" placeholder="הזן את שם השיר..." class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm text-white focus:outline-none focus:border-[#00d2ff] transition-colors">
+                    </div>
+
+                    <!-- Field 2: Artist Name -->
+                    <div class="md:col-span-3 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">שם האמן / פרויקט</label>
+                        <input type="text" value="Maya Rozen" placeholder="שם האמן..." class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm text-white focus:outline-none focus:border-[#00d2ff] transition-colors">
+                    </div>
+
+                    <!-- Field 3: BPM -->
+                    <div class="md:col-span-2 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">קצב (BPM)</label>
+                        <input type="number" value="126" placeholder="124" class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm text-white font-mono focus:outline-none focus:border-[#00d2ff] transition-colors">
+                    </div>
+
+                    <!-- Field 4: Genre Dropdown -->
+                    <div class="md:col-span-3 space-y-2">
+                        <label class="block text-xs font-semibold text-slate-300">בחירת ז'אנר (Genre)</label>
+                        <div class="relative">
+                            <select class="w-full px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm text-white appearance-none focus:outline-none focus:border-[#00d2ff] transition-colors pr-4 pl-10 cursor-pointer">
+                                <option value="micro-house" selected>Micro House</option>
+                                <option value="dark-techno">Dark Techno</option>
+                                <option value="ambient">Ambient Space</option>
+                                <option value="synthwave">Synthwave Retro</option>
+                                <option value="minimal">Minimal Tech</option>
+                            </select>
+                            <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </div>
+                    </div>
+
+                    <!-- Field 5: Audio File Upload Zone (MP3/WAV) -->
+                    <div class="md:col-span-12 mt-2">
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">קובץ אודיו (MP3 / WAV באיכות סטודיו)</label>
+                        <div class="border-2 border-dashed border-white/15 hover:border-[#00d2ff]/60 rounded-2xl p-6 text-center bg-black/30 hover:bg-black/50 transition-all cursor-pointer group">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" /></svg>
+                            </div>
+                            <div class="text-sm font-semibold text-white">גרור קובץ אודיו לכאן, או <span class="text-[#00d2ff] underline">לחץ לבחירה מקומית</span></div>
+                            <p class="text-xs text-slate-400 mt-1">תומך בקבצי WAV, FLAC, MP3 עד 150MB באיכות ללא דחיסה (Hi-Fi 24-bit)</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Uploaded Tracks Table -->
+            <section class="glass-card rounded-2xl overflow-hidden shadow-2xl">
+                <div class="p-5 md:p-6 border-b border-white/5 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-white font-display flex items-center gap-2">
+                            <span>טבלת היצירות שלי (Uploaded Tracks)</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-slate-300 font-normal">3 יצירות באוויר</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">ניהול קטלוג המוזיקה, צפייה בנתוני האזנה ועדכון פרטי קבצים</p>
+                    </div>
+
+                    <button class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-300 transition-all flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" /></svg>
+                        מיין לפי השמעות
+                    </button>
+                </div>
+
+                <!-- Tracks Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-sm">
+                        <thead>
+                            <tr class="bg-black/40 text-slate-400 text-xs uppercase tracking-wider border-b border-white/5">
+                                <th class="py-4 px-6 font-semibold">עטיפה ושם התראק</th>
+                                <th class="py-4 px-6 font-semibold">ז'אנר</th>
+                                <th class="py-4 px-6 font-semibold font-mono">קצב (BPM)</th>
+                                <th class="py-4 px-6 font-semibold font-mono">אורך</th>
+                                <th class="py-4 px-6 font-semibold">סך השמעות</th>
+                                <th class="py-4 px-6 font-semibold text-left">פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <!-- Track 1 -->
+                            <tr class="hover:bg-white/[0.03] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-md shadow-cyan-500/20 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                            <svg class="w-6 h-6 text-slate-950" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" /></svg>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white group-hover:text-cyan-400 transition-colors">Subharmonic Drift</div>
+                                            <div class="text-xs text-slate-400">שוחרר: לפני 14 ימים • Hi-Fi Master</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                                        Micro House
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">124 BPM</td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">06:21</td>
+                                <td class="py-4 px-6">
+                                    <div class="font-bold text-white">24,800</div>
+                                    <div class="text-[11px] text-emerald-400 font-medium">96% השלמת האזנה</div>
+                                </td>
+                                <td class="py-4 px-6 text-left">
+                                    <div class="inline-flex items-center gap-2">
+                                        <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                            עריכה
+                                        </button>
+                                        <button class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            מחיקה
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Track 2 -->
+                            <tr class="hover:bg-white/[0.03] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center font-bold text-white shadow-md shadow-purple-500/20 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white group-hover:text-purple-300 transition-colors">Neon Horizon Line</div>
+                                            <div class="text-xs text-slate-400">שוחרר: לפני חודש • Hi-Fi Master</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                                        Dark Techno
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">130 BPM</td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">05:45</td>
+                                <td class="py-4 px-6">
+                                    <div class="font-bold text-white">12,350</div>
+                                    <div class="text-[11px] text-emerald-400 font-medium">92% השלמת האזנה</div>
+                                </td>
+                                <td class="py-4 px-6 text-left">
+                                    <div class="inline-flex items-center gap-2">
+                                        <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                            עריכה
+                                        </button>
+                                        <button class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            מחיקה
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Track 3 -->
+                            <tr class="hover:bg-white/[0.03] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-indigo-700 to-cyan-500 flex items-center justify-center font-bold text-white shadow-md shadow-indigo-500/20 flex-shrink-0 group-hover:scale-105 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-white group-hover:text-cyan-400 transition-colors">Quantum Reverb</div>
+                                            <div class="text-xs text-slate-400">שוחרר: לפני חודשיים • Hi-Fi Master</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                                        Micro House
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">122 BPM</td>
+                                <td class="py-4 px-6 font-mono text-xs text-slate-300">07:10</td>
+                                <td class="py-4 px-6">
+                                    <div class="font-bold text-white">8,050</div>
+                                    <div class="text-[11px] text-emerald-400 font-medium">89% השלמת האזנה</div>
+                                </td>
+                                <td class="py-4 px-6 text-left">
+                                    <div class="inline-flex items-center gap-2">
+                                        <button class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                                            עריכה
+                                        </button>
+                                        <button class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-semibold transition-all flex items-center gap-1">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                            מחיקה
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </body>
+</html>
 }
 
 @code {
